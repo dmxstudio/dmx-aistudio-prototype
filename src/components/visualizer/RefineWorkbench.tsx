@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { Link } from 'react-router-dom'
 import { Sparkles, X, Monitor, Smartphone, ExternalLink, BadgeCheck, Check, Send, Pencil, Eye, EyeOff, ArrowRight, AlertTriangle, CircleAlert, Bot, ShieldCheck, RotateCcw } from 'lucide-react'
@@ -30,6 +30,15 @@ export function RefineWorkbench({
   const [device, setDevice] = useState<'desktop' | 'mobile'>('desktop')
   const [prompt, setPrompt] = useState('')
   const [editOpen, setEditOpen] = useState(false)
+
+  // A11y como el Modal: overlay a pantalla completa cierra con Escape y bloquea el scroll del fondo.
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = '' }
+  }, [open, onClose])
 
   const page = real.find((p) => p.pageId === selId) ?? real[0]
   const edit = page ? pageEdits[page.pageId] : undefined
@@ -92,7 +101,7 @@ export function RefineWorkbench({
   const st = pageStatus(page, edit, approvedPages[page.pageId])
 
   return (
-    <div className="fixed inset-0 z-50 bg-canvas flex flex-col animate-in fade-in duration-150">
+    <div className="fixed inset-0 z-50 bg-canvas flex flex-col animate-in fade-in duration-150" role="dialog" aria-modal="true">
       <header className="h-14 shrink-0 border-b border-line bg-surface px-4 flex items-center gap-3">
         <span className="text-accent-strong"><Sparkles size={18} /></span>
         <div className="flex flex-col leading-tight min-w-0">

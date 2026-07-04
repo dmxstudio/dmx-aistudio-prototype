@@ -5,7 +5,7 @@ import { Card } from '../components/ui/Card'
 import { StatCard } from '../components/ui/StatCard'
 import { SegmentedControl } from '../components/ui/SegmentedControl'
 import { Avatar } from '../components/ui/Avatar'
-import { metrics, studioAgents, trend } from '../data/mock'
+import { metrics, studioAgents, studioActivity, trend } from '../data/mock'
 
 // Minimal single-hue gradients from the accent indigo, faded via opacity (theme-robust).
 const ACCENT_BAR =
@@ -50,7 +50,7 @@ export function Overview() {
             </button>
           ))}
           <button
-            aria-label="More"
+            aria-label={t('common.more')}
             className="w-9 h-9 rounded-full bg-surface border border-line flex items-center justify-center text-muted hover:text-content shrink-0"
           >
             <MoreHorizontal size={16} />
@@ -63,11 +63,13 @@ export function Overview() {
         <Card className="p-5">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <div className="font-display text-4xl font-bold text-content leading-none">2,683</div>
+              <div className="font-display text-4xl font-bold text-content leading-none">
+                {studioActivity.artifacts.toLocaleString('en-US')}
+              </div>
               <div className="text-sm text-muted mt-2">{t('overview.trends')}</div>
             </div>
             <div className="text-sm">
-              <span className="text-success-strong font-medium">45%</span>{' '}
+              <span className="text-success-strong font-medium">{studioActivity.firstPassRate}%</span>{' '}
               <span className="text-muted">{t('overview.wellPerformed')}</span>
             </div>
           </div>
@@ -76,7 +78,7 @@ export function Overview() {
             <div
               className="absolute inset-y-0 left-0 rounded-full"
               style={{
-                width: '62%',
+                width: `${studioActivity.savedFill}%`,
                 background: ACCENT_BAR,
               }}
             />
@@ -84,7 +86,7 @@ export function Overview() {
               {t('overview.timeTracking')}
             </span>
             <span className="relative z-10 ml-auto pr-5 font-display text-sm font-bold text-content">
-              956h 23m
+              {studioActivity.savedHours}
             </span>
           </div>
 

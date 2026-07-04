@@ -3,7 +3,7 @@
 > Plataforma de diseño asistida por IA, **BYOM** (bring-your-own-model): convierte un brief en un
 > sitio listo para publicar a través de un pipeline de **contratos estructurados**, no de prompts sueltos.
 
-**Estado:** prototipo navegable · frontend-only · **8/9 fases construidas** · WIP.
+**Estado:** prototipo navegable · frontend-only · **9/9 fases construidas** · WIP.
 **Stack:** React 19 · Vite · TypeScript · Tailwind v4 · React Flow · Puck. Español por defecto · toggle EN.
 
 ---
@@ -42,14 +42,14 @@ anteriores → un HUB con **dos caras**: un contrato JSON (máquina) y editores 
 | 6 | **Estilo de diseño** | `StyleSpec`: compilador de dirección de arte + specimen + biblioteca de estilos | ✅ |
 | 7 | **Visualizador** | Candidate Workbench: genera el sitio, lo audita y sella un `DesignBuild` firmado | ✅ |
 | 8 | **CMS** | Modelo de contenido (tipos + campos) para un headless CMS | ✅ |
-| 9 | **Publicar** | Deploy config + gate | ⏳ pendiente |
+| 9 | **Publicar** | Cockpit de deploy: gate por `DesignBuild` firmado → `DeployBuild` firmado + URL viva + share link | ✅ |
 
 **Capas transversales:** **Inteligencia/Modelos** = *Hermes*, la plataforma de agentes (7 agentes por craft,
 BYOM / BYO-agent) · **Traducción** = i18n de contenido (spec).
 
 ---
 
-## La fase estrella: Visualizador (recién construida, V0→V4)
+## La fase estrella: Visualizador (V0→V5)
 
 El Visualizador **no** es un generador de sitios ni un preview bonito — es una **sala de revisión** que
 ejecuta la dirección **aprobada** sobre la arquitectura, la audita, y sella un artefacto trazable. Tres

@@ -16,6 +16,7 @@ const DURABLE = new Set([
   'styleSpec', 'styleSource', 'styleApproved',
   'vizSpec', 'vizSource', 'vizApproved', 'vizBuilds', 'vizCmsMode', 'vizPageEdits', 'vizPageApproved', 'vizChat',
   'cmsSpec', 'cmsSource', 'cmsApproved',
+  'publishConfig', 'publishedSig',
 ])
 
 // ── Sections (lists keyed by project/workspace id) ───────────────────────────

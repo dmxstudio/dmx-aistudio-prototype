@@ -11,7 +11,7 @@ import { useWorkspaceModels } from '../lib/useWorkspaceModels'
 import { loadSections, usePersistentValue, getPersistentValue } from '../lib/store'
 import { brandSections, seedMeridianBranding, type BrandSection } from '../data/branding'
 import { buildBookTokens } from '../lib/bookData'
-import { buildBindings, vizPages } from '../lib/vizData'
+import { buildBindings, vizPages, editedPage, type PageEdit } from '../lib/vizData'
 import type { ArchSpec } from '../lib/archData'
 import { buildCmsSpec, emptyContentType, cmsCounts, typeSignature, typeStatus, cmsPackage, FIELD_TYPES, CMS_TARGETS, PLATFORMS, PLATFORM_OPTIONS, defaultOptions, type CmsSpec, type ContentType, type CmsField, type CmsTarget, type CmsApprovals, type CmsStatus } from '../lib/cmsData'
 
@@ -47,8 +47,13 @@ export function Cms() {
   const archReady = !!arch && arch.pages.length > 0
   const branding = useMemo(() => loadSections<BrandSection>('branding', projectId, () => seedBrandingRead(projectId)), [projectId])
   const tokens = useMemo(() => buildBookTokens(branding), [branding])
-  // Los bindings del Visualizador (sección↔contenido) — derivados de la Arquitectura, complementan la propuesta.
-  const bindings = useMemo(() => (arch ? buildBindings(vizPages(arch)) : []), [arch])
+  // Bindings del Visualizador (sección↔contenido). Derivados de la Arquitectura pero HONRANDO las ediciones
+  // del owner (bloques ocultados en el cockpit) — el conteo refleja lo avalado, no la arquitectura cruda.
+  const vizPageEdits = getPersistentValue<Record<string, PageEdit>>('vizPageEdits', projectId, {})
+  const bindings = useMemo(
+    () => (arch ? buildBindings(vizPages(arch).map((p) => editedPage(p, vizPageEdits[p.pageId]))) : []),
+    [arch, vizPageEdits],
+  )
 
   const counts = cmsSpec ? cmsCounts(cmsSpec) : { types: 0, fields: 0, collections: 0 }
 

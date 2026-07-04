@@ -72,6 +72,16 @@ export const metrics: MetricCard[] = [
   { key: 'coverage', value: '86%', delta: '-1.2%', tone: 'danger', progress: 86 },
 ]
 
+// Hero del Resumen — actividad del estudio agregada (mock ilustrativo; en producción lo alimenta el pipeline).
+// Se lee como datos del pipeline, no como timesheet: artefactos generados, aprobación a la primera y horas
+// de diseño AHORRADAS por la automatización de contratos.
+export const studioActivity = {
+  artifacts: 2683, // artefactos generados (acumulado)
+  firstPassRate: 45, // % aprobados en primer pase
+  savedHours: '956 h', // tiempo de diseño ahorrado
+  savedFill: 62, // % de la barra
+}
+
 // normalized 0..1 heights for the trend mini-chart
 export const trend: number[] = [
   0.55, 0.48, 0.42, 0.38, 0.4, 0.46, 0.52, 0.5, 0.44, 0.4, 0.43, 0.5, 0.58, 0.62,

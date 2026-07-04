@@ -4,7 +4,6 @@ import { Login } from './screens/Login'
 import { Overview } from './screens/Overview'
 import { Workspaces } from './screens/Workspaces'
 import { Project } from './screens/Project'
-import { SectionScaffold } from './screens/SectionScaffold'
 import { Brief } from './screens/Brief'
 import { Branding } from './screens/Branding'
 import { DesignSystem } from './screens/DesignSystem'
@@ -12,6 +11,7 @@ import { Architecture } from './screens/Architecture'
 import { DesignStyle } from './screens/DesignStyle'
 import { Visualizer } from './screens/Visualizer'
 import { Cms } from './screens/Cms'
+import { Publish } from './screens/Publish'
 import { Users } from './screens/Users'
 import { Models } from './screens/Models'
 import { StyleLibrary } from './screens/StyleLibrary'
@@ -57,7 +57,7 @@ export function App() {
         <Route path="/:workspace/:project/style" element={<DesignStyle />} />
         <Route path="/:workspace/:project/visualizer" element={<Visualizer />} />
         <Route path="/:workspace/:project/cms" element={<Cms />} />
-        <Route path="/:workspace/:project/publish" element={<SectionScaffold sectionKey="publish" />} />
+        <Route path="/:workspace/:project/publish" element={<Publish />} />
         <Route path="*" element={<Navigate to={HOME} replace />} />
       </Route>
     </Routes>
