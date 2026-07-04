@@ -95,7 +95,6 @@ export function Brief() {
   useEffect(() => {
     setActiveId('overview')
     setFlashId(null)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId])
 
   const allFields = useMemo(() => sections.flatMap((s) => s.fields), [sections])

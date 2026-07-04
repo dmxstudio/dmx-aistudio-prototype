@@ -132,7 +132,6 @@ export function Branding() {
   useEffect(() => {
     setActiveId('foundation')
     setFlashId(null)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId])
 
   const sourceOptions: BrandSourceOption[] = [

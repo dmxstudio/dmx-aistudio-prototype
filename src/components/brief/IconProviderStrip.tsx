@@ -4,6 +4,7 @@ import { HEROICON_PATHS } from './heroiconPaths'
 // Sample strip (home · search · heart · settings · bell) for the selected icon provider.
 // Tabler / Bootstrap / Remix render via their CDN webfont (inherit currentColor, injected once);
 // Lucide is already a local dependency; Heroicons has no webfont → official paths inlined.
+// eslint-disable-next-line react-refresh/only-export-components
 export const ICON_PROVIDERS = ['Tabler', 'Lucide', 'Heroicons', 'Bootstrap Icons', 'Remix Icon'] as const
 
 const WEBFONTS: Record<string, { href: string; classes: string[] }> = {

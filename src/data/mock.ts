@@ -42,22 +42,23 @@ export const accountUsers: AppUser[] = [
   { id: 'u5', name: 'Bruno Caro', email: 'bruno@designo.mx', role: 'viewer', status: 'suspended' },
 ]
 
-export interface Employee {
+export interface Agent {
   name: string
   role: string
   rating: number
 }
 
-export const topEmployees: Employee[] = [
-  { name: 'Alina Hubner', role: 'Recruiter', rating: 4.9 },
-  { name: 'Yana Crout', role: 'Recruiter', rating: 4.9 },
-  { name: 'Thom Haye', role: 'UI Designer', rating: 4.8 },
-  { name: 'Yarik Alor', role: 'UX Designer', rating: 4.8 },
-  { name: 'Anna Joy', role: 'Developer', rating: 4.8 },
+// Los agentes de Hermes por craft (la plataforma de agentes del estudio). Mock — el "desempeño" es ilustrativo.
+export const studioAgents: Agent[] = [
+  { name: 'UI Rockstar', role: 'Estilo de diseño', rating: 4.9 },
+  { name: 'Front End Artist', role: 'Visualizador', rating: 4.9 },
+  { name: 'UX Specialist', role: 'Usuarios · Arquitectura', rating: 4.8 },
+  { name: 'Brand Specialist', role: 'Branding', rating: 4.8 },
+  { name: 'DS Manager', role: 'Design System', rating: 4.7 },
 ]
 
 export interface MetricCard {
-  key: 'meetings' | 'messages' | 'emails' | 'answers'
+  key: 'projects' | 'approved' | 'builds' | 'coverage'
   value: string
   delta: string
   tone: 'success' | 'danger'
@@ -65,10 +66,10 @@ export interface MetricCard {
 }
 
 export const metrics: MetricCard[] = [
-  { key: 'meetings', value: '147', delta: '+7%', tone: 'success', progress: 78 },
-  { key: 'messages', value: '342', delta: '-4.6%', tone: 'danger', progress: 31 },
-  { key: 'emails', value: '465', delta: '+12%', tone: 'success', progress: 95 },
-  { key: 'answers', value: '063', delta: '-1.2%', tone: 'danger', progress: 54 },
+  { key: 'projects', value: '12', delta: '+3', tone: 'success', progress: 70 },
+  { key: 'approved', value: '48', delta: '+9%', tone: 'success', progress: 82 },
+  { key: 'builds', value: '7', delta: '+2', tone: 'success', progress: 58 },
+  { key: 'coverage', value: '86%', delta: '-1.2%', tone: 'danger', progress: 86 },
 ]
 
 // normalized 0..1 heights for the trend mini-chart

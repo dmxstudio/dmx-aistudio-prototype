@@ -7,6 +7,7 @@ import { Badge } from '../components/ui/Badge'
 import { Modal } from '../components/ui/Modal'
 import { EnginePill } from '../components/models/EnginePill'
 import { PageRender } from '../components/visualizer/PageRender'
+import { RefineWorkbench } from '../components/visualizer/RefineWorkbench'
 import { useWorkspace } from '../lib/workspace'
 import { loadSections, usePersistentValue, getPersistentValue } from '../lib/store'
 import { brandSections, seedMeridianBranding, type BrandSection } from '../data/branding'
@@ -14,7 +15,7 @@ import { buildBookTokens } from '../lib/bookData'
 import { styleFromSpec, styleStatus, type StyleSpec } from '../lib/styleData'
 import type { ArchSpec } from '../lib/archData'
 import type { UsersSpec } from '../lib/usersData'
-import { buildVizSpec, buildGenerationPlan, vizPages, vizCounts, auditClassA, auditClassB, tasteEvidence, PENDING_CHECKS, buildChangeRequest, compileSkillMd, criticalPageId, applyOverride, appliedDiff, toBuild, NOTE_CHIPS, needsCms, buildBindings, type VizSpec, type VizPage, type VizBuild, type Finding, type AppliedOverride } from '../lib/vizData'
+import { buildVizSpec, buildGenerationPlan, vizPages, vizCounts, auditClassA, auditClassB, tasteEvidence, PENDING_CHECKS, buildChangeRequest, compileSkillMd, criticalPageId, applyOverride, appliedDiff, toBuild, NOTE_CHIPS, needsCms, buildBindings, editedPage, editedStyle, pageStatus, type VizSpec, type VizPage, type VizBuild, type Finding, type AppliedOverride, type PageEdit, type ChatMsg } from '../lib/vizData'
 
 // Visualizador (fase 7) — Candidate Workbench. Sala de revisión: ejecuta la StyleSpec APROBADA sobre la
 // Arquitectura, la audita (Clase A real) y prepara un DesignBuild. Frontera dura por construcción: aquí NO
@@ -36,6 +37,11 @@ export function Visualizer() {
   const [vizApproved, setVizApproved] = usePersistentValue<string>('vizApproved', projectId, '')
   const [vizBuilds, setVizBuilds] = usePersistentValue<VizBuild[]>('vizBuilds', projectId, [])
   const [cmsMode, setCmsMode] = usePersistentValue<'auto' | 'yes' | 'no'>('vizCmsMode', projectId, 'auto')
+  // V5 — cockpit del owner: edición por página, aprobación por página, transcript del chat.
+  const [pageEdits, setPageEdits] = usePersistentValue<Record<string, PageEdit>>('vizPageEdits', projectId, {})
+  const [approvedPages, setApprovedPages] = usePersistentValue<Record<string, string>>('vizPageApproved', projectId, {})
+  const [chat, setChat] = usePersistentValue<ChatMsg[]>('vizChat', projectId, [])
+  const [refineOpen, setRefineOpen] = useState(false)
   const [selId, setSelId] = useState('')
   const [bindingsOpen, setBindingsOpen] = useState(false)
   const [device, setDevice] = useState<'desktop' | 'mobile'>('desktop')
@@ -86,7 +92,15 @@ export function Visualizer() {
   // DesignCandidate (sin firmar) → DesignBuild (firmado). Solo la Clase A (real) bloquea/cuenta; la B es estimación.
   const reds = findingsA.filter((f) => f.severity === 'red').length
   const ambers = findingsA.filter((f) => f.severity === 'amber').length
-  const buildStatus: 'candidate' | 'build' | 'outdated' = upstreamDrifted || (vizApproved && vizSpec && vizApproved !== vizSpec.fingerprint) ? (vizApproved ? 'outdated' : 'candidate') : !vizApproved ? 'candidate' : 'build'
+  // V5 rollup: el owner avala página a página; el Build se sella cuando TODAS las reales están avaladas.
+  const realPages = useMemo(() => pages.filter((p) => p.renderMode === 'real'), [pages])
+  const approvedCount = realPages.filter((p) => pageStatus(p, pageEdits[p.pageId], approvedPages[p.pageId]) === 'approved').length
+  const allApproved = realPages.length > 0 && approvedCount === realPages.length
+  const sealReady = allApproved && reds === 0 && !upstreamDrifted
+  // outdated si: drift, o el candidato cambió tras firmar, o una página quedó sin avalar tras el sello
+  // (pageEdits/approvedPages viven FUERA del fingerprint → hay que plegar allApproved aquí).
+  const buildOutdated = upstreamDrifted || (!!vizSpec && vizApproved !== vizSpec.fingerprint) || !allApproved
+  const buildStatus: 'candidate' | 'build' | 'outdated' = !vizApproved ? 'candidate' : buildOutdated ? 'outdated' : 'build'
 
   const generate = (override?: AppliedOverride, note?: string) => {
     if (!canGenerate || !arch || !styleSpec) return
@@ -94,7 +108,9 @@ export function Visualizer() {
     setVizApproved('')
     setVizSpec(buildVizSpec(arch, styleSpec, users, { projectName, source: 'style', realIds, dsSig, override, note }))
   }
-  const regenerate = () => { setVizSpec(null); setVizApproved('') }
+  // limpia también la capa del owner: si no, un candidato nuevo hereda avales/ediciones viejos (mismos pageIds).
+  const resetOwnerLayer = () => { setPageEdits({}); setApprovedPages({}); setChat([]) }
+  const regenerate = () => { setVizSpec(null); setVizApproved(''); resetOwnerLayer() }
   // Iterar: cada chip es un transform PURO del estilo BASE (no del ya-overrideado) → idempotente y componible;
   // se compone sobre el override actual y produce un candidato nuevo (verificable, acotado).
   const iterate = (chipId: string) => {
@@ -103,14 +119,14 @@ export function Visualizer() {
     generate({ ...vizSpec?.override, ...chip.delta(baseApplied) }, chipId)
   }
   const sign = () => {
-    if (!vizSpec || reds > 0 || upstreamDrifted) return
+    if (!vizSpec || !sealReady) return
     setVizApproved(vizSpec.fingerprint)
     const b = toBuild(vizSpec, Date.now())
     setVizBuilds(vizBuilds.some((x) => x.fingerprint === b.fingerprint) ? vizBuilds : [b, ...vizBuilds].slice(0, 12))
   }
   // Restaurar: re-materializa los ajustes del build (override/note) contra el upstream ACTUAL como CANDIDATO
   // a re-firmar. NO reusa b.fingerprint (colgaría si el upstream cambió) — el gate de firma decide de nuevo.
-  const restore = (b: VizBuild) => { if (arch && styleSpec) { setVizSpec(buildVizSpec(arch, styleSpec, users, { projectName, source: b.source, realIds, dsSig, override: b.override, note: b.note })); setVizApproved('') } }
+  const restore = (b: VizBuild) => { if (arch && styleSpec) { setVizSpec(buildVizSpec(arch, styleSpec, users, { projectName, source: b.source, realIds, dsSig, override: b.override, note: b.note })); setVizApproved(''); resetOwnerLayer() } }
   const copyText = (text: string) => navigator.clipboard?.writeText(text).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500) }).catch(() => {})
   const download = (data: string, filename: string, mime: string) => {
     const a = document.createElement('a')
@@ -185,7 +201,8 @@ export function Visualizer() {
           </div>
           <div className="flex items-center gap-2 flex-wrap">
             <Button size="sm" variant="ghost" onClick={regenerate}><RotateCcw size={14} />{t('viz.regenerate')}</Button>
-            <Button size="sm" variant="secondary" onClick={() => setMachineOpen(true)}><Braces size={15} />{t('viz.machine')}</Button>
+            <Button size="sm" variant="secondary" onClick={() => setMachineOpen(true)} aria-label={t('viz.machine')} title={t('viz.machine')}><Braces size={15} /></Button>
+            <Button size="sm" variant="primary" onClick={() => setRefineOpen(true)}><Sparkles size={14} />{t('viz.refine.open')}</Button>
           </div>
         </div>
         <div className="flex items-center gap-2 mt-4 pt-4 border-t border-line flex-wrap text-[12px]">
@@ -196,7 +213,9 @@ export function Visualizer() {
             {reds === 0 && ambers === 0 && <Badge tone="success"><Check size={11} />{t('viz.clean')}</Badge>}
             {buildStatus === 'build'
               ? <span className="inline-flex items-center gap-1 font-medium bg-success-soft text-success-strong rounded-full px-3 py-1"><BadgeCheck size={13} />{t('viz.signed')}</span>
-              : <Button size="sm" variant="primary" onClick={sign} disabled={reds > 0 || upstreamDrifted} title={reds > 0 ? t('viz.signBlocked') : upstreamDrifted ? t('viz.driftBlocked') : undefined}>{buildStatus === 'outdated' ? <><RotateCw size={13} />{t('viz.resign')}</> : <><BadgeCheck size={13} />{t('viz.sign')}</>}</Button>}
+              : allApproved
+                ? <Button size="sm" variant="primary" onClick={sign} disabled={reds > 0 || upstreamDrifted} title={reds > 0 ? t('viz.signBlocked') : upstreamDrifted ? t('viz.driftBlocked') : undefined}>{buildStatus === 'outdated' ? <><RotateCw size={13} />{t('viz.resign')}</> : <><BadgeCheck size={13} />{t('viz.sign')}</>}</Button>
+                : <Button size="sm" variant="primary" onClick={() => setRefineOpen(true)}><Sparkles size={13} />{t('viz.refine.avalarN', { n: approvedCount, total: realPages.length })}</Button>}
           </span>
         </div>
         {upstreamDrifted && (
@@ -285,7 +304,7 @@ export function Visualizer() {
               {page.renderMode === 'real' && applied ? (
                 <div className="flex justify-center bg-raised border border-line rounded-2xl p-4">
                   <div style={{ width: device === 'mobile' ? 375 : '100%', maxWidth: device === 'mobile' ? 375 : 900 }}>
-                    <PageRender style={applied} page={page} brand={projectName} imagery={imagery} compact={device === 'mobile'} />
+                    <PageRender style={editedStyle(applied, pageEdits[page.pageId])} page={editedPage(page, pageEdits[page.pageId])} brand={projectName} imagery={imagery} compact={device === 'mobile'} />
                   </div>
                 </div>
               ) : (
@@ -395,6 +414,14 @@ export function Visualizer() {
         <p className="text-[12px] text-muted mb-3 leading-snug">{t('viz.bindingsNote')}</p>
         <pre className="text-[11px] leading-relaxed text-content bg-raised border border-line rounded-xl p-3 overflow-auto max-h-[50vh] font-mono whitespace-pre-wrap">{bindingsJson}</pre>
       </Modal>
+
+      {/* V5 — Cockpit del owner: sala de refinamiento a pantalla completa */}
+      {applied && styleSpec && (
+        <RefineWorkbench open={refineOpen} onClose={() => setRefineOpen(false)} pages={pages} baseApplied={applied} styleSpec={styleSpec} users={users}
+          brand={projectName} imagery={imagery} styleLink={to('style', 'project')}
+          pageEdits={pageEdits} setPageEdits={setPageEdits} approvedPages={approvedPages} setApprovedPages={setApprovedPages} chat={chat} setChat={setChat}
+          sealReady={sealReady} sealed={buildStatus === 'build'} onSeal={sign} t={t} />
+      )}
 
       {/* ChangeRequest: el Visualizador no edita dirección; emite una solicitud estructurada aguas arriba */}
       {crFinding && (() => {

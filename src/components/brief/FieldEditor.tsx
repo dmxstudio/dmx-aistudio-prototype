@@ -156,6 +156,7 @@ export function FieldEditor({
     const sel = ed.type === 'multiselect' ? splitMulti(seedValue) : seedValue ? [seedValue] : []
     const gi = baseGs.findIndex((g) => g.options.some((o) => sel.includes(o)))
     setOpenBase(gi >= 0 ? gi : 0)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field, initialValue])
 
   const formatRange = (n: number) =>

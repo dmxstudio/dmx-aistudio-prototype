@@ -7,6 +7,8 @@ import { getEditor } from '../../data/fieldEditors'
 // ponytail: id-keyed switch — one place to extend when new visual field kinds appear.
 
 const loadedFonts = new Set<string>()
+// util compartido co-ubicado a propósito con el componente (loader de fuentes de Google); no rompe nada en prod.
+// eslint-disable-next-line react-refresh/only-export-components
 export function loadGoogleFont(family: string) {
   const fam = family.trim()
   if (!fam || loadedFonts.has(fam)) return

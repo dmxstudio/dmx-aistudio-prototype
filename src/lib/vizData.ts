@@ -311,3 +311,69 @@ export function buildBindings(pages: VizPage[]): Binding[] {
     return out
   })
 }
+
+// ── V5: Cockpit del OWNER (refinamiento). El que dirige es el portador del criterio, con la confianza total
+// del estudio → aquí NO hay muro: control total para terminar el producto. La honestidad (Reto 2) SÍ se
+// mantiene: los cambios deterministas son reales; el salto generativo libre = costura del agente etiquetada. ──
+
+// Edición por página que aplica el owner encima del render derivado. NO se recomputa desde upstream (es capa propia).
+export interface PageEdit {
+  copy?: { headline?: string; sub?: string; cta?: string }
+  hidden?: string[] // bloques ocultados
+  override?: AppliedOverride // transforms de ejecución (los mismos NOTE_CHIPS), por página
+}
+export const editedPage = (page: VizPage, edit?: PageEdit): VizPage =>
+  !edit ? page : { ...page, blocks: page.blocks.filter((b) => !(edit.hidden ?? []).includes(b)), copy: { ...page.copy, ...edit.copy } }
+export const editedStyle = (base: AppliedStyle, edit?: PageEdit): AppliedStyle => applyOverride(base, edit?.override)
+
+// Etiqueta ES de cada bloque para reconocerlo en lenguaje natural (ocultar/mostrar por nombre).
+const BLOCK_LABEL: Record<string, string> = { header: 'nav', hero: 'hero', features: 'beneficios', testimonial: 'testimonio', cta: 'cta', footer: 'pie', filters: 'filtros', grid: 'grid', pagination: 'paginación', gallery: 'galería', summary: 'resumen', related: 'relacionados', form: 'formulario', content: 'contenido' }
+
+// Parser DETERMINISTA de prompt → intent. Reconoce transforms acotados / copy / ocultar-mostrar (reales); el
+// resto es 'direction' (se aplica en producción + se puede propagar) o 'agent' (salto libre) → costura etiquetada.
+export type IntentKind = 'air' | 'compact' | 'asym' | 'symmetric' | 'ctaSoft' | 'hide' | 'show' | 'copy' | 'direction' | 'agent'
+export interface Intent { kind: IntentKind; block?: string; field?: 'headline' | 'sub' | 'cta'; value?: string }
+export function parsePrompt(text: string, blocks: string[]): Intent {
+  const t = text.toLowerCase()
+  // copy explícito: "titular: X" / "cta: X" (antes que nada, para no confundir con transforms)
+  const cp = /^\s*(titular|título|titulo|headline|encabezado|subtítulo|subtitulo|sub|bajada|cta|botón|boton)\s*[:=]\s*(.+)$/i.exec(text)
+  if (cp) { const k = cp[1].toLowerCase(); const field = /cta|bot/.test(k) ? 'cta' : /sub|bajada/.test(k) ? 'sub' : 'headline'; return { kind: 'copy', field, value: cp[2].trim() } }
+  // ocultar / mostrar un bloque por nombre — LÍMITE DE PALABRA (no substring: "octaedro" no matchea
+  // "cta", "plataforma" no matchea "form").
+  const bound = (w: string) => w.length > 0 && new RegExp(`(^|[^a-záéíóúñü])${w}([^a-záéíóúñü]|$)`, 'i').test(t)
+  const blk = blocks.find((b) => bound(b) || bound(BLOCK_LABEL[b] ?? ''))
+  if (blk && /(oculta|quita|elimina|sin |remueve|esconde|borra)/.test(t)) return { kind: 'hide', block: blk }
+  if (blk && /(muestra|agrega|añade|anade|activa|vuelve a poner|pon el|pon la)/.test(t)) return { kind: 'show', block: blk }
+  // transforms acotados de ejecución
+  if (/(aire|espacio|respir|amplio|holgad|abierto)/.test(t)) return { kind: 'air' }
+  if (/(compact|apret|junt|denso|reduce el espacio|menos espacio)/.test(t)) return { kind: 'compact' }
+  if (/(asimétr|asimetr|desalin|rompe la simetr)/.test(t)) return { kind: 'asym' }
+  if (/(simétr|simetr|centra|alinea al centro)/.test(t)) return { kind: 'symmetric' }
+  if (/(cta sutil|bot[oó]n sutil|menos agresiv|cta suave|llamada sutil|cta discret)/.test(t)) return { kind: 'ctaSoft' }
+  // dirección (personalidad/arte) — se aplica en producción y se puede propagar a Estilo/corpus
+  if (/(editorial|saas|personalidad|direcci[oó]n|estilo|paleta|color|tipograf|m[aá]s c[aá]lid|premium|minimal|atrevid|corporativ)/.test(t)) return { kind: 'direction' }
+  return { kind: 'agent' }
+}
+
+// Aplica un intent RECONOCIBLE al PageEdit (los transforms usan los mismos NOTE_CHIPS del base). direction/agent
+// NO editan aquí (los maneja el chat como costura de agente). Devuelve el edit nuevo o null si no aplica.
+export function applyIntent(edit: PageEdit | undefined, intent: Intent, base: AppliedStyle): PageEdit | null {
+  const e: PageEdit = { copy: { ...edit?.copy }, hidden: [...(edit?.hidden ?? [])], override: { ...edit?.override } }
+  if (intent.kind === 'copy' && intent.field) { e.copy = { ...e.copy, [intent.field]: intent.value }; return e }
+  if (intent.kind === 'hide' && intent.block) { if (!e.hidden!.includes(intent.block)) e.hidden!.push(intent.block); return e }
+  if (intent.kind === 'show' && intent.block) { e.hidden = e.hidden!.filter((b) => b !== intent.block); return e }
+  const chip = NOTE_CHIPS.find((c) => c.id === intent.kind)
+  if (chip) { e.override = { ...e.override, ...chip.delta(applyOverride(base, edit?.override)) }; return e }
+  return null // direction / agent
+}
+
+// Aprobación POR PÁGINA (el owner avala cada página; el Build se sella cuando todas las reales están avaladas).
+export const pageSig = (page: VizPage, edit?: PageEdit): string => { const ep = editedPage(page, edit); return contractSig([ep.pageId, ep.copy, ep.blocks, edit?.override ?? null]) }
+export type PageStatus = 'pending' | 'approved' | 'outdated'
+export function pageStatus(page: VizPage, edit: PageEdit | undefined, approvedSig: string): PageStatus {
+  if (!approvedSig) return 'pending'
+  return approvedSig === pageSig(page, edit) ? 'approved' : 'outdated'
+}
+
+// Mensaje del chat del cockpit. role: owner (el humano) / studio (la máquina).
+export interface ChatMsg { id: string; role: 'owner' | 'studio'; text: string; kind: 'applied' | 'agent' | 'direction' | 'note' }

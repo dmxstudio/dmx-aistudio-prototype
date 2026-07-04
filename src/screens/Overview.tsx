@@ -5,7 +5,7 @@ import { Card } from '../components/ui/Card'
 import { StatCard } from '../components/ui/StatCard'
 import { SegmentedControl } from '../components/ui/SegmentedControl'
 import { Avatar } from '../components/ui/Avatar'
-import { metrics, topEmployees, trend } from '../data/mock'
+import { metrics, studioAgents, trend } from '../data/mock'
 
 // Minimal single-hue gradients from the accent indigo, faded via opacity (theme-robust).
 const ACCENT_BAR =
@@ -111,9 +111,9 @@ export function Overview() {
                 </span>
               </div>
               <div className="flex items-center gap-8 text-[11px] text-faint font-mono">
-                <span>Wed</span>
-                <span>Thu</span>
-                <span>Fri</span>
+                <span>{t('overview.days.d2')}</span>
+                <span>{t('overview.days.d1')}</span>
+                <span>{t('overview.days.d0')}</span>
               </div>
             </div>
             <div className="flex items-end gap-[3px] h-28">
@@ -130,13 +130,13 @@ export function Overview() {
 
         <Card className="p-5">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-medium text-content">{t('overview.bestEmployees')}</h3>
+            <h3 className="font-medium text-content">{t('overview.agents')}</h3>
             <button className="text-xs text-accent-strong hover:underline">
               {t('overview.viewAll')}
             </button>
           </div>
           <div className="space-y-3.5">
-            {topEmployees.map((e) => (
+            {studioAgents.map((e) => (
               <div key={e.name} className="flex items-center gap-3">
                 <Avatar name={e.name} size={36} />
                 <div className="flex-1 min-w-0">

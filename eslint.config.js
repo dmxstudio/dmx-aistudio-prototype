@@ -18,5 +18,11 @@ export default defineConfig([
     languageOptions: {
       globals: globals.browser,
     },
+    rules: {
+      // Reset-on-change (sincronizar estado local de UI cuando cambia projectId o el `open` de un modal) es
+      // un patrón usado deliberadamente en las pantallas y modales del mockup. Los efectos son resets de una
+      // sola pasada, benignos — no bugs de render en cascada. Esta regla es demasiado agresiva para ese uso.
+      'react-hooks/set-state-in-effect': 'off',
+    },
   },
 ])

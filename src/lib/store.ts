@@ -5,7 +5,18 @@ import { readJSON, writeJSON } from './persist'
 // in-memory map, mirrored to localStorage for *durable* kinds so edits survive a reload.
 // Durability is opt-in per kind: Branding + brand* stay volatile while that section is in flux
 // (we'll add them to DURABLE once Branding/book is finished — "cargar a redundancia").
-const DURABLE = new Set(['brief', 'briefCatalogs', 'connections', 'defaultEngine', 'phaseEngines', 'translationEngine', 'styleLibrary'])
+const DURABLE = new Set([
+  'brief', 'briefCatalogs', 'connections', 'defaultEngine', 'phaseEngines', 'translationEngine', 'styleLibrary',
+  // Specs del pipeline (fases ya construidas): durables para que una demo no pierda el avance en un reload.
+  // Son snapshots derivados y auto-consistentes. Branding + brand* siguen VOLÁTILES a propósito (resetean a su
+  // seed) hasta cerrar Branding/book — ver memoria redundancia-persistence-layer.
+  'archSpec', 'archSource', 'archApproved',
+  'usersSpec', 'usersSource', 'usersApproved',
+  'dsGenerated', 'dsApproved', 'dsSource', 'dsKnobs',
+  'styleSpec', 'styleSource', 'styleApproved',
+  'vizSpec', 'vizSource', 'vizApproved', 'vizBuilds', 'vizCmsMode', 'vizPageEdits', 'vizPageApproved', 'vizChat',
+  'cmsSpec', 'cmsSource', 'cmsApproved',
+])
 
 // ── Sections (lists keyed by project/workspace id) ───────────────────────────
 const stores: Record<string, Map<string, unknown>> = {}

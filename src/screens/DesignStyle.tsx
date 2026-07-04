@@ -143,13 +143,13 @@ export function DesignStyle() {
           <div className="flex items-center gap-2 flex-wrap">
             <Button size="sm" variant="ghost" onClick={regenerate}><RotateCcw size={14} />{t('style.regenerate')}</Button>
             <Button size="sm" variant="secondary" onClick={() => setJsonOpen(true)} aria-label="style.json" title="style.json"><Braces size={15} /></Button>
+            {status === 'approved'
+              ? <span className="inline-flex items-center gap-1.5 text-[13px] font-medium bg-success-soft text-success-strong rounded-full px-3 py-1.5"><Check size={14} />{t('style.approved')}</span>
+              : <Button size="sm" variant="primary" onClick={approve}>{status === 'outdated' ? <><RotateCw size={14} />{t('style.reapprove')}</> : <><Check size={14} />{t('style.approve')}</>}</Button>}
           </div>
         </div>
         <div className="flex items-center gap-2 mt-4 pt-4 border-t border-line flex-wrap">
-          {status === 'approved'
-            ? <Badge tone="success"><Check size={11} />{t('style.approved')}</Badge>
-            : <span className="text-[12px] text-faint">{t('style.pending')}</span>}
-          <span className="ml-auto flex items-center gap-1.5 flex-wrap">
+          <span className="flex items-center gap-1.5 flex-wrap">
             <Badge tone={dsGenerated ? 'success' : 'neutral'}><Palette size={11} />{dsGenerated ? t('style.usesTokens') : t('style.tokensPending')}</Badge>
             <Badge tone={goalsN > 0 ? 'success' : 'neutral'}><Target size={11} />{t('style.considersGoals', { n: goalsN })}</Badge>
             {patches.length > 0 && <Badge tone="warning"><GitPullRequest size={11} />{t('style.patchPending', { n: patches.length })}</Badge>}
@@ -247,12 +247,9 @@ export function DesignStyle() {
         </div>
       )}
 
-      {/* Handoff */}
-      <div className="flex items-center justify-between gap-3 flex-wrap mt-4">
-        <span className="text-[13px] text-muted inline-flex items-center gap-1.5"><ArrowRight size={15} className="shrink-0" />{t('style.handoffNote')}</span>
-        {status === 'approved'
-          ? <span className="inline-flex items-center gap-1.5 text-[13px] font-medium bg-success-soft text-success-strong rounded-full px-3.5 py-2"><Check size={15} />{t('style.approvedHandoff')}</span>
-          : <Button size="sm" variant="primary" onClick={approve}>{status === 'outdated' ? <><RotateCw size={15} />{t('style.reapprove')}</> : <><Check size={15} />{t('style.approve')}</>}</Button>}
+      {/* Handoff (la aprobación vive en la cabecera; aquí solo la nota de qué hace) */}
+      <div className="flex items-center gap-3 flex-wrap mt-4">
+        <span className="text-[13px] text-muted inline-flex items-center gap-1.5"><ArrowRight size={15} className="shrink-0" />{status === 'approved' ? t('style.approvedHandoff') : t('style.handoffNote')}</span>
       </div>
 
       <FamilyPicker open={pickOpen} onClose={() => setPickOpen(false)} onPick={(id) => generate('family', id)} families={families} t={t} />
