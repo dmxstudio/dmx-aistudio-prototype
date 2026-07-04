@@ -10,16 +10,13 @@ import { useWorkspace } from '../lib/workspace'
 import { useWorkspaceModels } from '../lib/useWorkspaceModels'
 import { loadSections, usePersistentValue, getPersistentValue } from '../lib/store'
 import { seedBrief, type BriefSection } from '../data/brief'
-import { brandSections, seedMeridianBranding, type BrandSection } from '../data/branding'
+import { seedBrandingRead, type BrandSection } from '../data/branding'
 import { buildArchSpec, archCounts, blockJson, blockSignature, blockStatus, BLOCK_FILE, ARCH_BLOCKS, type ArchSpec, type ArchPage, type ArchBlock, type ArchApprovals, type ArchStatus } from '../lib/archData'
 import { covKey, type UsersSpec, type CovTargets } from '../lib/usersData'
 
 // Arquitectura F0 — HUB generador-primero: deriva el spec (sitemap+flujos+copy+wireframe) desde
 // Brief+Branding+DS y expone los 3 bloques (Site Map / User Flow / Wireframe+Copy). Los editores
 // desacoplados (overlay nativo con React Flow / Puck) llegan en F1-F3. Ver architecture-approach.
-const seedBrandingRead = (id: string): BrandSection[] =>
-  id === 'p1' ? brandSections.map((s) => ({ ...s, fields: s.fields.map((f) => ({ ...f })) })) : id === 'p4' ? seedMeridianBranding() : brandSections.map((s) => ({ ...s, fields: s.fields.map((f) => ({ ...f, value: '', status: 'empty' as const })) }))
-
 export function Architecture() {
   const { t } = useTranslation()
   const { activeProject } = useWorkspace()

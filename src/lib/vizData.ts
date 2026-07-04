@@ -384,7 +384,9 @@ export function buildIsCurrent(o: {
   realPages: VizPage[]; pageEdits: Record<string, PageEdit>; approvedPages: Record<string, string>
 }): boolean {
   if (!o.vizSpec || !o.vizApproved || o.vizApproved !== o.vizSpec.fingerprint) return false
-  if (o.currentPlanId && o.currentPlanId !== o.vizSpec.plan.planId) return false // drift aguas arriba
+  // fail-CLOSED: si no se puede recomputar el plan (falta arch o styleSpec → currentPlanId ''), la vigencia
+  // no es verificable → NO vigente. Si no, un build cuya dirección se borró (regenerar Estilo) pasaría el gate.
+  if (!o.currentPlanId || o.currentPlanId !== o.vizSpec.plan.planId) return false // sin plan verificable, o drift
   return o.realPages.length > 0 && o.realPages.every((p) => pageStatus(p, o.pageEdits[p.pageId], o.approvedPages[p.pageId] ?? '') === 'approved')
 }
 

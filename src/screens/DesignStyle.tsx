@@ -11,7 +11,7 @@ import { useWorkspace } from '../lib/workspace'
 import { useWorkspaceModels } from '../lib/useWorkspaceModels'
 import { loadSections, usePersistentValue, getPersistentValue } from '../lib/store'
 import { seedBrief, type BriefSection } from '../data/brief'
-import { brandSections, seedMeridianBranding, brandGateIds, type BrandSection } from '../data/branding'
+import { seedBrandingRead, brandGateIds, type BrandSection } from '../data/branding'
 import { buildBookTokens } from '../lib/bookData'
 import type { UsersSpec } from '../lib/usersData'
 import type { ArchSpec } from '../lib/archData'
@@ -20,9 +20,6 @@ import { buildStyleSpec, emptyStyleSpec, styleFromSpec, familyToSpec, specimenCo
 // Estilo de diseño (fase 6) — compilador de dirección de arte. Kickstart 4 orígenes + cockpit
 // (rationale + familia/mezcla + dims por ownership + mini specimen VIVO + token-patch soft-gate +
 // anti-patterns + rúbrica 5 ejes + aprobar→handoff). Genera el sitio: el Visualizador, no aquí.
-const seedBrandingRead = (id: string): BrandSection[] =>
-  id === 'p1' ? brandSections.map((s) => ({ ...s, fields: s.fields.map((f) => ({ ...f })) })) : id === 'p4' ? seedMeridianBranding() : brandSections.map((s) => ({ ...s, fields: s.fields.map((f) => ({ ...f, value: '', status: 'empty' as const, rows: undefined })) }))
-
 export function DesignStyle() {
   const { t } = useTranslation()
   const { activeProject } = useWorkspace()

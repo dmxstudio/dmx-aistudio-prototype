@@ -10,7 +10,7 @@ import { DsKnobs } from '../components/designsystem/DsKnobs'
 import { useWorkspace } from '../lib/workspace'
 import { loadSections, usePersistentValue, getPersistentValue } from '../lib/store'
 import { useWorkspaceModels } from '../lib/useWorkspaceModels'
-import { brandSections, seedMeridianBranding, brandGateIds, type BrandSection } from '../data/branding'
+import { seedBrandingRead, brandGateIds, type BrandSection } from '../data/branding'
 import { dsPayload, buildDesignTokens, countTokens, brandVersion, withOverrides, DEFAULT_KNOBS, type DsKnobs as Knobs, type DsOverrides } from '../lib/dsData'
 import { validateDesignTokens, tokenGroups } from '../lib/dsValidate'
 import { fontRolesOf } from '../lib/bookData'
@@ -22,32 +22,6 @@ const GROUP_KEYS = ['color', 'type', 'space', 'components'] as const
 
 // Fase 1 — vista GENERADORA del Design System (kickstart 3 entradas) + Fase 0 (derivación + dos caras).
 // El DS se deriva de la Marca; no hay grid de campos. Revisión por grupos y perillas → Fases 2-3.
-// El seed de lectura espeja al de Branding (emptySeed limpia value Y toda la metadata por campo).
-const emptyBrand = (): BrandSection[] =>
-  brandSections.map((s) => ({
-    ...s,
-    fields: s.fields.map((ff) => ({
-      ...ff,
-      value: '',
-      rows: undefined,
-      status: 'empty' as const,
-      kind: undefined,
-      aiValue: undefined,
-      humanValue: undefined,
-      inherited: undefined,
-      confidence: undefined,
-      owner: undefined,
-      source: undefined,
-      taxonomy: undefined,
-      approval: undefined,
-    })),
-  }))
-const seedBrandingRead = (id: string): BrandSection[] =>
-  id === 'p1'
-    ? brandSections.map((s) => ({ ...s, fields: s.fields.map((ff) => ({ ...ff })) }))
-    : id === 'p4'
-      ? seedMeridianBranding()
-      : emptyBrand()
 
 // Lee la Marca de un proyecto RESOLVIENDO su herencia igual que Branding: si el proyecto hereda
 // (brandSource='inherit:Y'), toma la Marca de Y con los campos marcados heredados+cerrados. Sin esto
