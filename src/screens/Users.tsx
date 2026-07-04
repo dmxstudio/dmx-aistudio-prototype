@@ -12,12 +12,15 @@ import { useWorkspace } from '../lib/workspace'
 import { useWorkspaceModels } from '../lib/useWorkspaceModels'
 import { loadSections, usePersistentValue } from '../lib/store'
 import { seedBrief, type BriefSection } from '../data/brief'
-import { seedBrandingRead, brandGateIds, type BrandSection } from '../data/branding'
+import { brandSections, seedMeridianBranding, brandGateIds, type BrandSection } from '../data/branding'
 import { buildUsersSpec, emptySegment, usersCounts, segmentSignature, segmentStatus, covKey, type UsersSpec, type UserSegment, type UsersApprovals, type UserStatus, type Evidence } from '../lib/usersData'
 import type { ArchSpec } from '../lib/archData'
 
 // El usuario (U0) — HUB generador-primero + master-detail por segmento. La médula es el grafo de
 // aceptación segmento→meta→dolor (users.json). Facetas Metas&Dolores / Journey son la cara humana.
+const seedBrandingRead = (id: string): BrandSection[] =>
+  id === 'p1' ? brandSections.map((s) => ({ ...s, fields: s.fields.map((f) => ({ ...f })) })) : id === 'p4' ? seedMeridianBranding() : brandSections.map((s) => ({ ...s, fields: s.fields.map((f) => ({ ...f, value: '', status: 'empty' as const, rows: undefined })) }))
+
 const EV_TONE: Record<Evidence, 'success' | 'warning' | 'danger'> = { fact: 'success', assumption: 'warning', risk: 'danger' }
 
 export function Users() {
