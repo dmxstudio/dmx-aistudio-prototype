@@ -375,5 +375,18 @@ export function pageStatus(page: VizPage, edit: PageEdit | undefined, approvedSi
   return approvedSig === pageSig(page, edit) ? 'approved' : 'outdated'
 }
 
+// ¿El DesignBuild sellado sigue VIGENTE? (= buildStatus 'build'). La firma coincide, el upstream no derivó
+// (planId), y TODAS las páginas reales siguen avaladas. pageEdits/approvedPages viven FUERA del fingerprint,
+// así que hay que plegarlos aquí. Fuente única compartida por el Visualizador (verdad) y Publicar (gate),
+// para que el gate de Publicar no pueda considerar firmado un build que el Visualizador ya marca outdated.
+export function buildIsCurrent(o: {
+  vizSpec: VizSpec | null; vizApproved: string; currentPlanId: string
+  realPages: VizPage[]; pageEdits: Record<string, PageEdit>; approvedPages: Record<string, string>
+}): boolean {
+  if (!o.vizSpec || !o.vizApproved || o.vizApproved !== o.vizSpec.fingerprint) return false
+  if (o.currentPlanId && o.currentPlanId !== o.vizSpec.plan.planId) return false // drift aguas arriba
+  return o.realPages.length > 0 && o.realPages.every((p) => pageStatus(p, o.pageEdits[p.pageId], o.approvedPages[p.pageId] ?? '') === 'approved')
+}
+
 // Mensaje del chat del cockpit. role: owner (el humano) / studio (la máquina).
 export interface ChatMsg { id: string; role: 'owner' | 'studio'; text: string; kind: 'applied' | 'agent' | 'direction' | 'note' }

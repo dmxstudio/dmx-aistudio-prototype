@@ -79,6 +79,10 @@ export function typeStatus(spec: CmsSpec, approvals: CmsApprovals, typeId: strin
   return sig === typeSignature(spec, typeId) ? 'approved' : 'outdated'
 }
 
+// Todos los tipos aprobados (y hay al menos uno). Lo usa el CMS (badge "Todo aprobado") y el gate de Publicar.
+export const cmsAllApproved = (spec: CmsSpec, approvals: CmsApprovals): boolean =>
+  spec.types.length > 0 && spec.types.every((tp) => typeStatus(spec, approvals, tp.id) === 'approved')
+
 // ── Paquete por plataforma: el output "autoportante" que se arma para Publicar. DISTINTO por plataforma —
 // Payload = config de colecciones (contrato de schema, el sitio lo consume por API); Instatic = content model
 // + los design tokens (casi el deploy: Instatic es su propio publisher). ─────

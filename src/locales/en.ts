@@ -1126,7 +1126,7 @@ export const en: Dict = {
     env: 'Environment',
     envK: { analytics: 'Analytics', forms: 'Forms', sitemap: 'Sitemap', cdn: 'CDN' },
     preflight: 'Pre-flight',
-    check: { designBuild: 'DesignBuild sealed', cms: 'CMS package ready', domain: 'Domain configured' },
+    check: { designBuild: 'DesignBuild sealed', cms: 'CMS with all types approved', domain: 'Domain configured' },
     deploying: 'Deploying…',
     step: { build: 'Compiling the DesignBuild', bundle: 'Bundling assets + tokens', upload: 'Uploading to host', dns: 'Wiring domain + DNS', live: 'Live' },
     notReady: 'Complete the pre-flight',

@@ -10,19 +10,16 @@ import { PageRender } from '../components/visualizer/PageRender'
 import { RefineWorkbench } from '../components/visualizer/RefineWorkbench'
 import { useWorkspace } from '../lib/workspace'
 import { loadSections, usePersistentValue, getPersistentValue } from '../lib/store'
-import { brandSections, seedMeridianBranding, type BrandSection } from '../data/branding'
+import { seedBrandingRead, type BrandSection } from '../data/branding'
 import { buildBookTokens } from '../lib/bookData'
 import { styleFromSpec, styleStatus, type StyleSpec } from '../lib/styleData'
 import type { ArchSpec } from '../lib/archData'
 import type { UsersSpec } from '../lib/usersData'
-import { buildVizSpec, buildGenerationPlan, vizPages, vizCounts, auditClassA, auditClassB, tasteEvidence, PENDING_CHECKS, buildChangeRequest, compileSkillMd, criticalPageId, applyOverride, appliedDiff, toBuild, NOTE_CHIPS, needsCms, buildBindings, editedPage, editedStyle, pageStatus, type VizSpec, type VizPage, type VizBuild, type Finding, type AppliedOverride, type PageEdit, type ChatMsg } from '../lib/vizData'
+import { buildVizSpec, buildGenerationPlan, vizPages, vizCounts, auditClassA, auditClassB, tasteEvidence, PENDING_CHECKS, buildChangeRequest, compileSkillMd, criticalPageId, applyOverride, appliedDiff, toBuild, NOTE_CHIPS, needsCms, buildBindings, editedPage, editedStyle, pageStatus, buildIsCurrent, type VizSpec, type VizPage, type VizBuild, type Finding, type AppliedOverride, type PageEdit, type ChatMsg } from '../lib/vizData'
 
 // Visualizador (fase 7) — Candidate Workbench. Sala de revisión: ejecuta la StyleSpec APROBADA sobre la
 // Arquitectura, la audita (Clase A real) y prepara un DesignBuild. Frontera dura por construcción: aquí NO
 // hay ningún control que edite la dirección; si algo falla por dirección, se vuelve a Estilo de diseño.
-const seedBrandingRead = (id: string): BrandSection[] =>
-  id === 'p1' ? brandSections.map((s) => ({ ...s, fields: s.fields.map((f) => ({ ...f })) })) : id === 'p4' ? seedMeridianBranding() : brandSections.map((s) => ({ ...s, fields: s.fields.map((f) => ({ ...f, value: '', status: 'empty' as const, rows: undefined })) }))
-
 const CAUSE_ICON = { execution: RotateCcw, direction: Sparkles, contract: Route } as const
 
 export function Visualizer() {
@@ -97,10 +94,10 @@ export function Visualizer() {
   const approvedCount = realPages.filter((p) => pageStatus(p, pageEdits[p.pageId], approvedPages[p.pageId]) === 'approved').length
   const allApproved = realPages.length > 0 && approvedCount === realPages.length
   const sealReady = allApproved && reds === 0 && !upstreamDrifted
-  // outdated si: drift, o el candidato cambió tras firmar, o una página quedó sin avalar tras el sello
-  // (pageEdits/approvedPages viven FUERA del fingerprint → hay que plegar allApproved aquí).
-  const buildOutdated = upstreamDrifted || (!!vizSpec && vizApproved !== vizSpec.fingerprint) || !allApproved
-  const buildStatus: 'candidate' | 'build' | 'outdated' = !vizApproved ? 'candidate' : buildOutdated ? 'outdated' : 'build'
+  // outdated si: drift, o el candidato cambió tras firmar, o una página quedó sin avalar tras el sello.
+  // buildIsCurrent es la fuente única (compartida con Publicar) — pliega el drift + allApproved.
+  const buildStatus: 'candidate' | 'build' | 'outdated' =
+    !vizApproved ? 'candidate' : buildIsCurrent({ vizSpec, vizApproved, currentPlanId, realPages, pageEdits, approvedPages }) ? 'build' : 'outdated'
 
   const generate = (override?: AppliedOverride, note?: string) => {
     if (!canGenerate || !arch || !styleSpec) return

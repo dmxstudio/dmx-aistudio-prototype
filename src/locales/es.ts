@@ -1122,7 +1122,7 @@ export const es = {
     env: 'Entorno',
     envK: { analytics: 'Analytics', forms: 'Formularios', sitemap: 'Sitemap', cdn: 'CDN' },
     preflight: 'Pre-flight',
-    check: { designBuild: 'DesignBuild sellado', cms: 'Paquete de CMS listo', domain: 'Dominio configurado' },
+    check: { designBuild: 'DesignBuild sellado', cms: 'CMS con todos los tipos aprobados', domain: 'Dominio configurado' },
     deploying: 'Desplegando…',
     step: { build: 'Compilando el DesignBuild', bundle: 'Empaquetando assets + tokens', upload: 'Subiendo al host', dns: 'Enlazando dominio + DNS', live: 'En vivo' },
     notReady: 'Completa el pre-flight',

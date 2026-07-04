@@ -9,11 +9,11 @@ import { EnginePill } from '../components/models/EnginePill'
 import { useWorkspace } from '../lib/workspace'
 import { useWorkspaceModels } from '../lib/useWorkspaceModels'
 import { loadSections, usePersistentValue, getPersistentValue } from '../lib/store'
-import { brandSections, seedMeridianBranding, type BrandSection } from '../data/branding'
+import { seedBrandingRead, type BrandSection } from '../data/branding'
 import { buildBookTokens } from '../lib/bookData'
 import { buildBindings, vizPages, editedPage, type PageEdit } from '../lib/vizData'
 import type { ArchSpec } from '../lib/archData'
-import { buildCmsSpec, emptyContentType, cmsCounts, typeSignature, typeStatus, cmsPackage, FIELD_TYPES, CMS_TARGETS, PLATFORMS, PLATFORM_OPTIONS, defaultOptions, type CmsSpec, type ContentType, type CmsField, type CmsTarget, type CmsApprovals, type CmsStatus } from '../lib/cmsData'
+import { buildCmsSpec, emptyContentType, cmsCounts, typeSignature, typeStatus, cmsAllApproved, cmsPackage, FIELD_TYPES, CMS_TARGETS, PLATFORMS, PLATFORM_OPTIONS, defaultOptions, type CmsSpec, type ContentType, type CmsField, type CmsTarget, type CmsApprovals, type CmsStatus } from '../lib/cmsData'
 
 // CMS (fase 8) — panel AUTOPORTANTE plataforma-primero: eliges plataforma (Payload/Instatic), la estructura se
 // PROPONE desde Arquitectura + los bindings del Visualizador, ajustas opciones, y se arma el PAQUETE para
@@ -23,8 +23,6 @@ const nextId = (prefix: string, items: { id: string }[]) => {
   items.forEach((x) => { const m = new RegExp(`^${prefix}(\\d+)$`).exec(x.id); if (m) max = Math.max(max, +m[1]) })
   return `${prefix}${max + 1}`
 }
-const seedBrandingRead = (id: string): BrandSection[] =>
-  id === 'p1' ? brandSections.map((s) => ({ ...s, fields: s.fields.map((f) => ({ ...f })) })) : id === 'p4' ? seedMeridianBranding() : brandSections.map((s) => ({ ...s, fields: s.fields.map((f) => ({ ...f, value: '', status: 'empty' as const, rows: undefined })) }))
 
 export function Cms() {
   const { t } = useTranslation()
@@ -183,7 +181,7 @@ export function Cms() {
             <div className="text-[12px] text-muted mt-1 inline-flex items-center gap-1.5"><Route size={13} className="text-accent-strong" />{t('cms.derivedNote', { n: bindings.length })}</div>
           </div>
           <span className="flex items-center gap-2 shrink-0">
-            {approvedCount === counts.types && counts.types > 0
+            {cmsSpec && cmsAllApproved(cmsSpec, cmsApproved)
               ? <Badge tone="success"><Check size={11} />{t('cms.allApproved')}</Badge>
               : <span className="text-[12px] text-faint">{t('cms.approvedCount', { n: approvedCount, total: counts.types })}</span>}
             {approvedCount < counts.types && <button onClick={approveAll} className="text-[12px] text-accent-strong hover:underline">{t('cms.approveAll')}</button>}

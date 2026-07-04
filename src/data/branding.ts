@@ -661,3 +661,13 @@ export function seedMeridianBranding(): BrandSection[] {
     }),
   }))
 }
+
+// Lectura seed del Branding por proyecto (p1 = demo Nimbus con datos; p4 = Meridian; resto = vacío).
+// Canónica — extraída de las pantallas que la duplicaban (Visualizer/Cms/…). Ver [[shared-field-editor]].
+export function seedBrandingRead(id: string): BrandSection[] {
+  return id === 'p1'
+    ? brandSections.map((s) => ({ ...s, fields: s.fields.map((f) => ({ ...f })) }))
+    : id === 'p4'
+      ? seedMeridianBranding()
+      : brandSections.map((s) => ({ ...s, fields: s.fields.map((f) => ({ ...f, value: '', status: 'empty' as const, rows: undefined })) }))
+}

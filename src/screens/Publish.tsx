@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Rocket, Check, ArrowRight, Lock, Braces, Copy, Download, RotateCcw, Globe, Server, Box, Cloud, Link2, ShieldCheck, CircleAlert, ExternalLink, Fingerprint, Sparkles, PartyPopper, Loader2 } from 'lucide-react'
@@ -7,10 +7,14 @@ import { Badge } from '../components/ui/Badge'
 import { Modal } from '../components/ui/Modal'
 import { EnginePill } from '../components/models/EnginePill'
 import { useWorkspace } from '../lib/workspace'
-import { usePersistentValue, getPersistentValue } from '../lib/store'
+import { usePersistentValue, getPersistentValue, loadSections } from '../lib/store'
+import { seedBrandingRead, type BrandSection } from '../data/branding'
+import { buildBookTokens } from '../lib/bookData'
 import type { ArchSpec } from '../lib/archData'
-import type { VizSpec } from '../lib/vizData'
-import type { CmsSpec, CmsTarget } from '../lib/cmsData'
+import type { StyleSpec } from '../lib/styleData'
+import type { UsersSpec } from '../lib/usersData'
+import { vizPages, criticalPageId, buildGenerationPlan, buildIsCurrent, type VizSpec, type PageEdit } from '../lib/vizData'
+import { cmsAllApproved, type CmsSpec, type CmsTarget, type CmsApprovals } from '../lib/cmsData'
 import { sig, HOSTS, hostKind, resolveCms, PUBLISH_ENV, defaultEnv, buildDeployBuild, publishChecklist, publishReady, DEPLOY_STEPS, shareLink, type HostKind } from '../lib/publishData'
 
 // Publicar (fase 9, agente Dev Ninja) — cockpit de deploy. El DesignBuild firmado (+ CMS opcional) → DeployBuild
@@ -41,20 +45,37 @@ export function Publish() {
     return () => { if (timer.current) { clearTimeout(timer.current); timer.current = null } }
   }, [projectId])
 
-  // Upstream: el DesignBuild firmado + el CMS opcional + procedencia.
+  // Upstream: el DesignBuild firmado + el CMS opcional + procedencia + los estados que definen su VIGENCIA.
   const vizSpec = getPersistentValue<VizSpec | null>('vizSpec', projectId, null)
   const vizApproved = getPersistentValue<string>('vizApproved', projectId, '')
   const cmsMode = getPersistentValue<'auto' | 'yes' | 'no'>('vizCmsMode', projectId, 'auto')
   const cmsSpec = getPersistentValue<CmsSpec | null>('cmsSpec', projectId, null)
+  const cmsApproved = getPersistentValue<CmsApprovals>('cmsApproved', projectId, {})
   const styleApproved = getPersistentValue<string>('styleApproved', projectId, '')
+  const styleSpec = getPersistentValue<StyleSpec | null>('styleSpec', projectId, null)
+  const users = getPersistentValue<UsersSpec | null>('usersSpec', projectId, null)
   const arch = getPersistentValue<ArchSpec | null>('archSpec', projectId, null)
+  const pageEdits = getPersistentValue<Record<string, PageEdit>>('vizPageEdits', projectId, {})
+  const pageApproved = getPersistentValue<Record<string, string>>('vizPageApproved', projectId, {})
 
-  const sealed = !!vizSpec && !!vizApproved && vizApproved === vizSpec.fingerprint // DesignBuild firmado
+  // GATE HONESTO: no basta `vizApproved === fingerprint`. El fingerprint NO incluye la capa del owner
+  // (pageEdits/approvedPages) ni el drift aguas arriba, así que Publicar rehace la MISMA vigencia que el
+  // Visualizador (buildIsCurrent) — si el owner editó/desavaló una página tras firmar, o el upstream derivó,
+  // el build ya no está firmado y no se publica. realIds es determinista (rol crítico) → páginas reconstruibles.
+  const branding = useMemo(() => loadSections<BrandSection>('branding', projectId, () => seedBrandingRead(projectId)), [projectId])
+  const dsSig = useMemo(() => JSON.stringify(buildBookTokens(branding)), [branding])
+  const pages = useMemo(() => { const c = arch ? criticalPageId(arch) : null; return arch ? vizPages(arch, c ? [c] : []) : [] }, [arch])
+  const realPages = useMemo(() => pages.filter((p) => p.renderMode === 'real'), [pages])
+  const currentPlanId = useMemo(() => (arch && styleSpec ? buildGenerationPlan(pages, styleSpec, arch, users, dsSig).planId : ''), [pages, styleSpec, arch, users, dsSig])
+  const sealed = buildIsCurrent({ vizSpec, vizApproved, currentPlanId, realPages, pageEdits, approvedPages: pageApproved })
+
   const withCms = resolveCms(arch, cmsMode)
   const platform: CmsTarget | null = withCms ? cmsSpec?.target ?? null : null
   const kind = hostKind(withCms, platform)
+  // El pre-flight de CMS exige TODOS los tipos aprobados (no solo que exista el spec). Fuente: cmsAllApproved.
+  const cmsReady = !withCms || (!!cmsSpec && cmsAllApproved(cmsSpec, cmsApproved))
   const inputs = {
-    projectName, withCms, platform,
+    projectName, withCms, platform, cmsReady,
     styleSig: styleApproved ? sig(styleApproved) : '', archSig: sig(arch?.pages ?? null), designBuildSig: vizApproved, cmsSig: withCms && cmsSpec ? sig(cmsSpec) : null,
   }
 
@@ -244,6 +265,8 @@ function PublishedPanel({ liveUrl, share, copied, copyText, t }: { liveUrl: stri
         <div className="flex items-center gap-2 flex-wrap">
           <a href={liveUrl} target="_blank" rel="noreferrer" className="text-[13px] font-mono text-accent-strong hover:underline inline-flex items-center gap-1.5"><ExternalLink size={13} />{liveUrl}</a>
         </div>
+        {/* La honestidad no se apaga al publicar: el estado "en vivo" también recuerda que el deploy es simulado. */}
+        <div className="mt-2 text-[11px] text-muted inline-flex items-center gap-1.5"><CircleAlert size={12} />{t('publish.simNote')}</div>
         <div className="flex items-center gap-2 mt-3 pt-3 border-t border-success-soft flex-wrap">
           <span className="text-[12px] text-muted inline-flex items-center gap-1.5"><Link2 size={13} className="text-accent-strong" />{t('publish.share')}</span>
           <span className="text-[12px] font-mono text-content truncate">{share}</span>

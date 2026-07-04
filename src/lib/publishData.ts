@@ -44,7 +44,7 @@ export interface DeployBuild {
   source: { style: string; arch: string; designBuild: string; cms: string | null } // procedencia (firmas aguas arriba)
   fingerprint: string
 }
-export interface PublishInputs { projectName: string; withCms: boolean; platform: CmsTarget | null; styleSig: string; archSig: string; designBuildSig: string; cmsSig: string | null }
+export interface PublishInputs { projectName: string; withCms: boolean; platform: CmsTarget | null; cmsReady: boolean; styleSig: string; archSig: string; designBuildSig: string; cmsSig: string | null }
 
 export function buildDeployBuild(inp: PublishInputs, host: string, domain: string, env: Record<string, boolean>): DeployBuild {
   const kind = hostKind(inp.withCms, inp.platform)
@@ -59,7 +59,7 @@ export interface Check { key: string; ok: boolean }
 export function publishChecklist(inp: PublishInputs, domain: string): Check[] {
   return [
     { key: 'designBuild', ok: !!inp.designBuildSig }, // DesignBuild sellado
-    { key: 'cms', ok: !inp.withCms || !!inp.cmsSig }, // paquete de CMS listo si el proyecto lo lleva
+    { key: 'cms', ok: !inp.withCms || inp.cmsReady }, // CMS con TODOS los tipos aprobados si el proyecto lo lleva
     { key: 'domain', ok: domain.trim().length > 0 },
   ]
 }
