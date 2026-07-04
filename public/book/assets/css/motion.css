@@ -1,0 +1,39 @@
+/* Motion layer — tasteful, accessible. Scroll motion is fully gated behind
+   prefers-reduced-motion and CSS scroll-driven animations (no JS scroll-hijack). */
+
+/* Always-on, low-risk hovers (no motion sensitivity) */
+.card2, .persona, .idx, .dm-pr { transition: border-color .15s ease, box-shadow .2s ease; }
+.card2:hover, .persona:hover, .idx:hover, .dm-pr:hover { box-shadow: var(--shadow); border-color: var(--line-strong); }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Hover micro-interactions */
+  .btn { transition: transform .15s ease, box-shadow .2s ease, background-color .15s, border-color .15s, color .15s; }
+  .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+
+  .tile .ph, .mocktile .mst, .logo-tile .stage > * { transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+  .tile:hover .ph, .mocktile:hover .mst { transform: scale(1.06); }
+  .logo-tile:hover .stage > * { transform: scale(1.05); }
+
+  .swatch .chip { transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+  .swatch:hover .chip { transform: scale(1.03); }
+
+  .icon-cell i { transition: transform .25s ease; }
+  .icon-cell:hover i { transform: scale(1.18); }
+
+  /* Scroll reveal — IntersectionObserver + fixed-duration transition.
+     Decoupled from scroll position, so it reads intentional and never stutters. */
+  html.js .reveal { opacity: 0; transform: translateY(48px); transition: opacity .75s cubic-bezier(.22,.61,.36,1), transform .75s cubic-bezier(.22,.61,.36,1); }
+  html.js .reveal.in-view { opacity: 1; transform: none; }
+  html.js .reveal.no-anim { transition: none; }
+
+  /* Parallax stays scroll-driven (off main thread, continuous) */
+  @supports (animation-timeline: view()) {
+    .parallax { animation: m-para linear both; animation-timeline: view(); animation-range: cover; }
+    @keyframes m-para { from { transform: translateY(-7%); } to { transform: translateY(7%); } }
+  }
+}
+
+/* Never let scroll animations hide content in print (no scroll timeline there) */
+@media print {
+  .reveal, .parallax { animation: none !important; opacity: 1 !important; transform: none !important; }
+}

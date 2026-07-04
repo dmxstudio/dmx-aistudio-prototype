@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>(function(){try{var t=localStorage.getItem('meridian-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);var b=new URLSearchParams(location.search).get('brand');var p=b?(JSON.parse(localStorage.getItem('dmxbook:'+b)||'{}')||{}):{};window.__applyBrandTokens=function(th){var d=Object.assign({},p.tokens||{},th==='dark'?(p.tokensDark||{}):{});for(var k in d)document.documentElement.style.setProperty(k,d[k]);};if(p.tokens)window.__applyBrandTokens(t);}catch(e){}})();</script>
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0E1116" media="(prefers-color-scheme: dark)">
+  <title>Meridian · Aplicaciones</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/print.css" media="print">
+</head>
+<body data-page="applications">
+  <a class="skip" href="#main" data-i18n="ui.skip">Saltar al contenido</a>
+  <header id="site-nav"></header>
+
+  <div class="layout">
+    <aside id="sub-toc"></aside>
+    <main id="main" class="content">
+      <header class="page-head">
+        <div class="kicker"><span class="page-num">04</span><span data-i18n="pages.applications.kicker">Aplicaciones</span></div>
+        <h1 data-i18n="pages.applications.title">La marca en el mundo real</h1>
+        <p class="lead" data-i18n="pages.applications.lead">El sistema aplicado en cada superficie.</p>
+      </header>
+
+      <section id="print" data-tier="core">
+        <div class="sec-head"><span class="sec-num">4.1</span><h2 data-i18n="sections.print">Impresos y papelería</h2><span class="sec-en">Print &amp; stationery</span><span class="tier"><span class="tdot t-core"></span>core</span></div>
+        <p class="purpose" data-i18n="purpose.print"></p>
+        <div class="cols cols-3 mt6" data-print-tiles>
+          <div class="mocktile"><div class="mst" style="background:#2348E0;flex-direction:column;gap:8px"><svg data-mark width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="#fff"/><rect x="4" y="17.6" width="32" height="4.8" fill="#2348E0"/><rect x="17.6" y="5" width="4.8" height="9" fill="#2348E0"/></svg><span class="wm" style="color:#fff;font-size:18px" data-brand>Meridian</span></div><div class="cap" data-i18n="p3.bizcard">Tarjetas de presentación</div></div>
+          <div class="mocktile"><div class="mst" style="background:#fff;align-items:flex-start;padding:18px"><svg data-mark width="20" height="20" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="#2348E0"/><rect x="4" y="17.6" width="32" height="4.8" fill="#fff"/><rect x="17.6" y="5" width="4.8" height="9" fill="#fff"/></svg></div><div class="cap" data-i18n="p3.letterhead">Papelería</div></div>
+          <div class="mocktile"><div class="mst" style="background:var(--n-100)"><span class="wm" style="color:#0E1116;font-size:20px" data-brand>Meridian</span></div><div class="cap">Folder</div></div>
+        </div>
+        <div class="filechips mt6"><span class="fchip"><i class="ti ti-file" aria-hidden="true"></i> PDF/X</span><span class="fchip">CMYK</span><span class="fchip" data-print-color>Pantone 2728 C</span></div>
+      </section>
+
+      <section id="digital" data-tier="core">
+        <div class="sec-head"><span class="sec-num">4.2</span><h2 data-i18n="sections.digital">Digital y web</h2><span class="sec-en">Digital &amp; web</span><span class="tier"><span class="tdot t-core"></span>core</span></div>
+        <p class="purpose" data-i18n="purpose.digital"></p>
+        <div class="label mt6">Favicon / PWA</div>
+        <div data-favicon-demo hidden style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:var(--s4)"></div>
+        <div class="sizechips"><span class="sizechip big">512</span><span class="sizechip">192</span><span class="sizechip">180</span><span class="sizechip">48</span><span class="sizechip">32</span><span class="sizechip">16</span></div>
+        <div class="label mt6" data-og-label>Social share banner · og:image</div>
+        <div class="mocktile" data-og>
+          <div data-og-stage style="position:relative;aspect-ratio:1200/630;display:flex;align-items:center;justify-content:center;gap:12px;overflow:hidden;background:var(--bg-soft)"><svg data-mark width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="#2348E0"/><rect x="4" y="17.6" width="32" height="4.8" fill="#fff"/><rect x="17.6" y="5" width="4.8" height="9" fill="#fff"/></svg><span class="wm" style="font-size:22px" data-brand>Meridian</span><div style="position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:71.67%;border-left:2px dashed rgba(208,58,58,.75);border-right:2px dashed rgba(208,58,58,.75);pointer-events:none"></div><span style="position:absolute;top:6px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(208,58,58,.85);color:#fff;pointer-events:none">safe 860×630</span><span style="position:absolute;bottom:6px;right:8px;font-family:var(--font-mono);font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(14,17,22,.6);color:#fff;pointer-events:none">1200×630</span></div>
+          <div class="cap">1200×630 px · <span data-i18n="p3.ogSafe">zona segura centrada</span> 860×630 px</div>
+        </div>
+      </section>
+
+      <section id="app-ui" data-tier="rec">
+        <div class="sec-head"><span class="sec-num">4.3</span><h2 data-i18n="sections.app-ui">App / UI de producto</h2><span class="sec-en">App / product UI</span><span class="tier"><span class="tdot t-rec"></span>rec</span></div>
+        <p class="purpose" data-i18n="purpose.app-ui"></p>
+        <div class="mocktile mt6" style="max-width:280px"><div class="mst" style="background:#0E1116;flex-direction:column;gap:10px;height:200px"><svg data-mark width="28" height="28" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="#2348E0"/><rect x="4" y="17.6" width="32" height="4.8" fill="#fff"/><rect x="17.6" y="5" width="4.8" height="9" fill="#fff"/></svg><span class="wm" style="color:#fff;font-size:18px" data-brand>Meridian</span><span style="width:60%;height:8px;border-radius:6px;background:#353B45"></span><span style="width:48%;height:8px;border-radius:6px;background:#353B45"></span><span style="width:34%;height:26px;border-radius:14px;background:#2348E0;margin-top:4px"></span></div><div class="cap">Dark mode</div></div>
+      </section>
+
+      <section id="app-icons" data-tier="core">
+        <div class="sec-head"><span class="sec-num">4.4</span><h2 data-i18n="sections.app-icons">Iconos de app y assets de tienda</h2><span class="sec-en">App icons &amp; store assets · iOS / Android</span><span class="tier"><span class="tdot t-core"></span>core</span></div>
+        <p class="purpose" data-i18n="purpose.app-icons"></p>
+        <div class="cols cols-3 mt6">
+          <div class="platgroup" data-appicon="ios"><div class="ph"><i class="ti ti-brand-apple" aria-hidden="true"></i><span class="nm">iOS</span></div><div class="sizechips"><span class="sizechip big">1024</span><span class="sizechip">180</span><span class="sizechip">167</span><span class="sizechip">152</span><span class="sizechip">120</span><span class="sizechip">87</span><span class="sizechip">80</span><span class="sizechip">76</span><span class="sizechip">60</span><span class="sizechip">58</span><span class="sizechip">40</span><span class="sizechip">29</span><span class="sizechip">20</span></div></div>
+          <div class="platgroup" data-appicon="android"><div class="ph"><i class="ti ti-brand-android" aria-hidden="true"></i><span class="nm">Android</span></div><div class="sizechips"><span class="sizechip big">432</span><span class="sizechip">512</span><span class="sizechip">192</span><span class="sizechip">144</span><span class="sizechip">96</span><span class="sizechip">72</span><span class="sizechip">48</span></div><p style="margin:var(--s3) 0 0;font-size:var(--fs-xs);color:var(--text-mut);font-family:var(--font-mono)">Adaptive · 108dp · safe 72dp</p></div>
+          <div class="platgroup" data-appicon="play"><div class="ph"><i class="ti ti-brand-google-play" aria-hidden="true"></i><span class="nm">Play Store</span></div><div class="sizechips"><span class="sizechip big">512</span><span class="sizechip">192</span><span class="sizechip">96</span><span class="sizechip">48</span></div><p style="margin:var(--s3) 0 0;font-size:var(--fs-xs);color:var(--text-mut);font-family:var(--font-mono)">Icono 512 · Feature 1024×500</p></div>
+        </div>
+        <div class="callout mt6"><i class="ti ti-app-window" aria-hidden="true"></i><span><b data-i18n="p3.master">Master</b> 1024×1024 · sin transparencia · la máscara la pone el sistema</span></div>
+      </section>
+
+      <section id="social" data-tier="core">
+        <div class="sec-head"><span class="sec-num">4.5</span><h2 data-i18n="sections.social">Plantillas de redes sociales</h2><span class="sec-en">Social media templates</span><span class="tier"><span class="tdot t-core"></span>core</span></div>
+        <p class="purpose" data-i18n="purpose.social"></p>
+        <div class="cols cols-3 mt6" data-social-cards hidden></div>
+        <div class="table-scroll mt6" data-social-table><table class="spec">
+          <thead><tr><th data-i18n="p3.platform">Plataforma</th><th data-i18n="p3.avatar">Avatar</th><th data-i18n="p3.banner">Banner</th><th data-i18n="p3.post">Post</th><th data-i18n="p3.story">Story</th></tr></thead>
+          <tbody>
+            <tr><td class="samp">Instagram</td><td class="mono">320×320</td><td class="mono">—</td><td class="mono">1080×1350</td><td class="mono">1080×1920</td></tr>
+            <tr><td class="samp">Facebook</td><td class="mono">170×170</td><td class="mono">820×312</td><td class="mono">1200×630</td><td class="mono">1080×1920</td></tr>
+            <tr><td class="samp">LinkedIn</td><td class="mono">300×300</td><td class="mono">1128×191</td><td class="mono">1200×627</td><td class="mono">—</td></tr>
+            <tr><td class="samp">X</td><td class="mono">400×400</td><td class="mono">1500×500</td><td class="mono">1600×900</td><td class="mono">—</td></tr>
+            <tr><td class="samp">YouTube</td><td class="mono">800×800</td><td class="mono">2560×1440</td><td class="mono">1280×720</td><td class="mono">1080×1920</td></tr>
+            <tr><td class="samp">TikTok</td><td class="mono">200×200</td><td class="mono">—</td><td class="mono">—</td><td class="mono">1080×1920</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section id="email" data-tier="rec">
+        <div class="sec-head"><span class="sec-num">4.6</span><h2 data-i18n="sections.email">Email y firmas</h2><span class="sec-en">Email &amp; signatures</span><span class="tier"><span class="tdot t-rec"></span>rec</span></div>
+        <p class="purpose" data-i18n="purpose.email"></p>
+        <div class="sig mt6"><svg data-mark width="38" height="38" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="#2348E0"/><rect x="4" y="17.6" width="32" height="4.8" fill="#fff"/><rect x="17.6" y="5" width="4.8" height="9" fill="#fff"/></svg><div class="bar"></div><div><div style="font-weight:500" data-i18n="p3.p1name">Ana Ríos</div><div style="font-size:var(--fs-sm);color:var(--text-soft)" data-i18n="p3.sigRole">Líder de diseño · Meridian</div><div style="font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--brand-700);margin-top:4px" data-sig-handle>meridian.example · @meridian</div><div style="font-family:var(--font-mono);font-size:var(--fs-xs);color:var(--text-soft);margin-top:2px" data-sig-phone hidden></div></div></div>
+        <div class="aiblock mt6" data-sig-html hidden>
+          <div class="code" data-sig-code data-copy=""></div>
+          <div class="ft"><i class="ti ti-copy" aria-hidden="true"></i><span data-i18n="p3.sigHtmlNote">Copia este HTML y pégalo en la firma de tu proveedor de correo.</span></div>
+        </div>
+      </section>
+
+      <section id="presentations" data-tier="rec">
+        <div class="sec-head"><span class="sec-num">4.7</span><h2 data-i18n="sections.presentations">Presentaciones y documentos</h2><span class="sec-en">Presentations &amp; documents</span><span class="tier"><span class="tdot t-rec"></span>rec</span></div>
+        <p class="purpose" data-i18n="purpose.presentations"></p>
+        <div class="cols cols-3 mt6" data-app-tiles="presentations"><div class="mocktile"><div class="mst" style="background:#fff;align-items:flex-start;flex-direction:column;gap:8px;padding:22px;height:180px"><svg data-mark width="22" height="22" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="#2348E0"/><rect x="4" y="17.6" width="32" height="4.8" fill="#fff"/><rect x="17.6" y="5" width="4.8" height="9" fill="#fff"/></svg><span style="font-family:var(--font-display);font-weight:700;font-size:24px;margin-top:auto">Título de slide</span><span style="width:70%;height:7px;border-radius:6px;background:var(--n-200)"></span></div><div class="cap" data-i18n="p3.deck">Presentación</div></div></div>
+      </section>
+
+      <section id="packaging" data-tier="rec">
+        <div class="sec-head"><span class="sec-num">4.8</span><h2 data-i18n="sections.packaging">Packaging</h2><span class="sec-en">Packaging</span><span class="tier"><span class="tdot t-rec"></span>rec</span></div>
+        <p class="purpose" data-i18n="purpose.packaging"></p>
+        <div class="cols cols-3 mt6" data-app-tiles="packaging">
+          <div class="mocktile"><div class="mst" style="background:#2348E0"><span class="wm" style="color:#fff;font-size:20px" data-brand>Meridian</span></div><div class="cap">Box</div></div>
+          <div class="mocktile"><div class="mst" style="background:var(--n-100)"><svg data-mark width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="#2348E0"/><rect x="4" y="17.6" width="32" height="4.8" fill="#fff"/><rect x="17.6" y="5" width="4.8" height="9" fill="#fff"/></svg></div><div class="cap">Label</div></div>
+          <div class="mocktile"><div class="mst" style="background:#0E1116"><span class="wm" style="color:#fff;font-size:20px" data-brand>Meridian</span></div><div class="cap">Sleeve</div></div>
+        </div>
+      </section>
+
+      <section id="signage" data-tier="rec">
+        <div class="sec-head"><span class="sec-num">4.9</span><h2 data-i18n="sections.signage">Señalética y wayfinding</h2><span class="sec-en">Signage &amp; wayfinding</span><span class="tier"><span class="tdot t-rec"></span>rec</span></div>
+        <p class="purpose" data-i18n="purpose.signage"></p>
+        <div class="cols cols-3 mt6" data-app-tiles="signage"><div class="mocktile"><div class="mst" style="background:#2348E0;gap:10px"><svg data-mark width="30" height="30" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="#fff"/><rect x="4" y="17.6" width="32" height="4.8" fill="#2348E0"/><rect x="17.6" y="5" width="4.8" height="9" fill="#2348E0"/></svg><span class="wm" style="color:#fff;font-size:22px" data-brand>Meridian</span></div><div class="cap">Signage</div></div></div>
+      </section>
+
+      <section id="environmental" data-tier="adv">
+        <div class="sec-head"><span class="sec-num">4.10</span><h2 data-i18n="sections.environmental">Espacial / retail</h2><span class="sec-en">Environmental &amp; retail</span><span class="tier"><span class="tdot t-adv"></span>adv</span></div>
+        <p class="purpose" data-i18n="purpose.environmental"></p>
+        <div class="cols cols-3 mt6" data-app-tiles="environmental"><div class="mocktile"><div class="mst" style="background:linear-gradient(135deg,#1b2740,#3a4d74);height:170px;gap:10px"><svg data-mark width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="#fff"/><rect x="4" y="17.6" width="32" height="4.8" fill="#1b2740"/><rect x="17.6" y="5" width="4.8" height="9" fill="#1b2740"/></svg><span class="wm" style="color:#fff;font-size:24px" data-brand>Meridian</span></div><div class="cap">Retail</div></div></div>
+      </section>
+
+      <section id="merch" data-tier="rec">
+        <div class="sec-head"><span class="sec-num">4.11</span><h2 data-i18n="sections.merch">Merchandising y apparel</h2><span class="sec-en">Merchandise &amp; apparel</span><span class="tier"><span class="tdot t-rec"></span>rec</span></div>
+        <p class="purpose" data-i18n="purpose.merch"></p>
+        <div class="cols cols-3 mt6" data-app-tiles="merch">
+          <div class="mocktile"><div class="mst" style="background:#fff"><svg data-mark width="30" height="30" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="#2348E0"/><rect x="4" y="17.6" width="32" height="4.8" fill="#fff"/><rect x="17.6" y="5" width="4.8" height="9" fill="#fff"/></svg></div><div class="cap">T-shirt</div></div>
+          <div class="mocktile"><div class="mst" style="background:#0E1116"><span class="wm" style="color:#fff;font-size:18px" data-brand>Meridian</span></div><div class="cap">Tote</div></div>
+          <div class="mocktile"><div class="mst" style="background:#2348E0"><svg data-mark width="30" height="30" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="#fff"/><rect x="4" y="17.6" width="32" height="4.8" fill="#2348E0"/><rect x="17.6" y="5" width="4.8" height="9" fill="#2348E0"/></svg></div><div class="cap">Cap</div></div>
+        </div>
+      </section>
+
+      <section id="vehicle" data-tier="adv">
+        <div class="sec-head"><span class="sec-num">4.12</span><h2 data-i18n="sections.vehicle">Vehículos / rotulación</h2><span class="sec-en">Vehicle / livery</span><span class="tier"><span class="tdot t-adv"></span>adv</span></div>
+        <p class="purpose" data-i18n="purpose.vehicle"></p>
+        <div class="cols cols-3 mt6" data-app-tiles="vehicle"><div class="mocktile"><div class="mst" style="background:#fff;gap:12px"><svg data-mark width="30" height="30" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="#2348E0"/><rect x="4" y="17.6" width="32" height="4.8" fill="#fff"/><rect x="17.6" y="5" width="4.8" height="9" fill="#fff"/></svg><span class="wm" style="font-size:24px" data-brand>Meridian</span></div><div class="cap">Livery</div></div></div>
+      </section>
+
+      <section id="cobranding" data-tier="rec">
+        <div class="sec-head"><span class="sec-num">4.13</span><h2 data-i18n="sections.cobranding">Co-branding y alianzas</h2><span class="sec-en">Co-branding &amp; partnerships</span><span class="tier"><span class="tdot t-rec"></span>rec</span></div>
+        <p class="purpose" data-i18n="purpose.cobranding"></p>
+        <div class="cols cols-2 mt6">
+          <div class="mocktile"><div class="mst" style="background:#fff;gap:18px"><span class="wm" style="font-size:22px;color:#0E1116" data-brand>Meridian</span><span style="width:1px;height:30px;background:#C9CFDA"></span><span style="font-family:var(--font-display);font-weight:700;font-size:22px;color:#6B7280">Partner</span></div><div class="cap">Lockup · light</div></div>
+          <div class="mocktile"><div class="mst" style="background:#0E1116;gap:18px"><span class="wm" style="font-size:22px;color:#F7F9FC" data-brand>Meridian</span><span style="width:1px;height:30px;background:#3A424E"></span><span style="font-family:var(--font-display);font-weight:700;font-size:22px;color:#9AA3B2">Partner</span></div><div class="cap">Lockup · dark</div></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer id="pager"></footer>
+  <button id="to-top" class="to-top" type="button" aria-label="Volver arriba"><i class="ti ti-arrow-up" aria-hidden="true"></i></button>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/nav.js"></script>
+  <script src="assets/js/copy.js"></script>
+</body>
+</html>

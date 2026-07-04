@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Space Mono", ui-monospace, monospace;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-canvas: #f6f4ef;
+  --color-surface: #ffffff;
+  --color-raised: #faf8f3;
+  --color-sidebar: #1b1a18;
+  --color-line: #e7e2d8;
+
+  --color-content: #1b1a18;
+  --color-muted: #6f6b61;
+  --color-faint: #9b968c;
+
+  --color-accent: #5b4bd6;
+  --color-accent-ink: #ffffff;
+  --color-accent-soft: #eceafb;
+  --color-accent-strong: #3a2fa6;
+
+  --color-success: #2e9e6b;
+  --color-success-soft: #e3f4ec;
+  --color-success-strong: #1b6e48;
+  --color-warning: #e0a019;
+  --color-warning-soft: #fbf0d6;
+  --color-warning-strong: #8a6410;
+  --color-danger: #d6453f;
+  --color-danger-soft: #fbe9e8;
+  --color-danger-strong: #9e2b27;
+  --color-danger-ink: #ffffff;
+
+  --shadow-soft: 0 6px 18px rgba(20, 18, 16, 0.06);
+}
+
+:root {
+  --spectrum-low: #e5573b;
+  --spectrum-mid: #f4a63c;
+  --spectrum-high: #5fb85b;
+  --sidebar-text: #c9c4ba;
+  --sidebar-faint: #807b72;
+}
+
+.dark {
+  --color-canvas: #141312;
+  --color-surface: #1e1c1a;
+  --color-raised: #252320;
+  --color-sidebar: #0e0d0c;
+  --color-line: #33302b;
+  --color-content: #f2efe9;
+  --color-muted: #a8a399;
+  --color-faint: #7c776e;
+  --color-accent: #8e82e6;
+  --color-accent-ink: #141312;
+  --color-accent-soft: #2a2550;
+  --color-accent-strong: #cecbf6;
+  --color-success: #5dcaa5;
+  --color-success-soft: #123528;
+  --color-success-strong: #9fe1cb;
+  --color-warning: #ef9f27;
+  --color-warning-soft: #3a2a08;
+  --color-warning-strong: #fac775;
+  --color-danger: #f09595;
+  --color-danger-soft: #3a1513;
+  --color-danger-strong: #f7c1c1;
+  --color-danger-ink: #2a0f0d;
+  --shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.45);
+  --sidebar-text: #a8a399;
+  --sidebar-faint: #6b675e;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background-color: var(--color-canvas);
+    color: var(--color-content);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+@keyframes briefFlash {
+  from {
+    background-color: var(--color-accent-soft);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+.brief-flash {
+  animation: briefFlash 1.2s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .brief-flash {
+    animation: none;
+  }
+}
+
+/* Hide the scrollbar chrome but keep the element scrollable (horizontal tab strips). */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* iOS-style activity indicator: 12 bars fading in sequence (see components/ui/Spinner). */
+@keyframes iosSpinFade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.15;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-ios-spinner] > span {
+    animation: none !important;
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,39 @@
+/* Meridian — dark theme. Semantic role tokens swapped by [data-theme].
+   Web pattern: set data-theme before first paint (no FOUC) and persist the
+   user's choice as 'system' | 'light' | 'dark'. 'system' = no [data-theme]
+   attribute, which falls through to the prefers-color-scheme block below. */
+
+:root {
+  color-scheme: light dark;
+  --bg: #FFFFFF; --surface: #FFFFFF; --surface-raised: #FFFFFF;
+  --text: #0E1116; --text-soft: #4B5563; --text-mut: #9AA3B2;
+  --line: #E0E5EC; --accent: #2348E0; --accent-ink: #162E93;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0E1116; --surface: #181D25; --surface-raised: #222A36;
+  --text: #F7F9FC; --text-soft: #C2CAD6; --text-mut: #909AAA;
+  --line: #262C36; --accent: #4F6FEE; --accent-ink: #7E99F6;
+}
+
+/* System default when the user hasn't chosen explicitly */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --bg: #0E1116; --surface: #181D25; --surface-raised: #222A36;
+    --text: #F7F9FC; --text-soft: #C2CAD6; --text-mut: #909AAA;
+    --line: #262C36; --accent: #4F6FEE; --accent-ink: #7E99F6;
+  }
+}
+
+/*
+  <head> (before CSS):
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0E1116" media="(prefers-color-scheme: dark)">
+  <script>
+    var p = localStorage.getItem('theme');            // 'system' | 'light' | 'dark'
+    if (p && p !== 'system') document.documentElement.dataset.theme = p;
+  </script>
+*/

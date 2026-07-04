@@ -1,0 +1,34 @@
+{
+  "$comment": "Meridian locale formatting config. Store/exchange data in ISO 8601; format for DISPLAY with Intl/CLDR per locale. Patterns use Unicode LDML / ICU skeletons.",
+  "locales": {
+    "es-MX": {
+      "date": { "long": "d 'de' MMMM 'de' y", "medium": "d MMM y", "short": "dd/MM/yyyy" },
+      "time": { "hour12": false, "short": "HH:mm", "withMeridiem": "h:mm a" },
+      "number": { "decimal": ".", "group": ",", "pattern": "#,##0.###" },
+      "currency": { "code": "MXN", "symbol": "$", "position": "before", "display": "$#,##0.00 MXN" },
+      "percent": { "pattern": "#,##0 %" },
+      "phone": "+52 ## #### ####"
+    },
+    "en-US": {
+      "date": { "long": "MMMM d, y", "medium": "MMM d, y", "short": "M/d/yyyy" },
+      "time": { "hour12": true, "short": "h:mm a" },
+      "number": { "decimal": ".", "group": ",", "pattern": "#,##0.###" },
+      "currency": { "code": "USD", "symbol": "$", "position": "before", "display": "US$#,##0.00" },
+      "percent": { "pattern": "#,##0%" },
+      "phone": "+1 (###) ###-####"
+    }
+  },
+  "data": {
+    "standard": "ISO 8601",
+    "date": "YYYY-MM-DD",
+    "datetime": "YYYY-MM-DDTHH:mm:ssZ",
+    "currencyCodes": "ISO 4217 (MXN, USD)",
+    "phone": "E.164",
+    "units": "SI (space between value and unit)",
+    "rule": "Never store or exchange locale-formatted values. Format only at display time, per the user's locale."
+  },
+  "implementation": {
+    "web": "Intl.DateTimeFormat / Intl.NumberFormat (Unicode CLDR)",
+    "icu": "ICU MessageFormat for plurals, gender, and select"
+  }
+}

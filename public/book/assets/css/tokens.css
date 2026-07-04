@@ -1,0 +1,81 @@
+:root {
+  /* Meridian — Dirección B · Sistema suizo */
+  --brand-50:#EEF2FE; --brand-100:#D6E0FD; --brand-200:#ADC0FB; --brand-300:#7E99F6;
+  --brand-400:#4F6FEE; --brand-500:#2348E0; --brand-600:#1B39B8; --brand-700:#162E93;
+  --brand-800:#142772; --brand-900:#0E1B4D;
+  --brand:#2348E0; --brand-ink:#162E93;
+
+  --n-0:#FFFFFF; --n-50:#F7F9FC; --n-100:#EEF1F5; --n-200:#E0E5EC; --n-300:#CBD2DC;
+  --n-400:#9AA3B2; --n-500:#6B7280; --n-600:#4B5563; --n-700:#353B45; --n-800:#1E232B; --n-900:#0E1116;
+
+  --success:#1A8F5E; --warning:#C77A11; --danger:#D03A3A; --info:var(--brand);
+
+  /* Roles */
+  --bg:#FFFFFF; --bg-soft:var(--n-50); --bg-muted:var(--n-100); --surface:#FFFFFF; --surface-raised:#FFFFFF;
+  --text:var(--n-900); --text-soft:var(--n-600); --text-mut:var(--n-400);
+  --line:var(--n-200); --line-strong:var(--n-300);
+  --accent:var(--brand); --accent-ink:var(--brand-700);
+  --nav-bg:rgba(255,255,255,.85); --subnav-bg:rgba(255,255,255,.92);
+  color-scheme:light;
+
+  /* Type */
+  --font-display:'Space Grotesk', 'Space Grotesk Fallback', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-text:'Inter', 'Inter Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono:'Space Mono', 'Space Mono Fallback', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  --fs-display:clamp(2.6rem, 1.5rem + 3.4vw, 4rem);
+  --fs-h1:clamp(2rem, 1.4rem + 2vw, 2.85rem);
+  --fs-h2:1.75rem; --fs-h3:1.3rem; --fs-h4:1.075rem;
+  --fs-body:1.0625rem; --fs-sm:0.875rem; --fs-xs:0.75rem;
+  --lh-tight:1.1; --lh-snug:1.3; --lh-body:1.65;
+
+  /* Space — 8pt scale */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px;
+
+  /* Radius / layout */
+  --r-sm:6px; --r-md:10px; --r-lg:16px;
+  --maxw:1200px; --read:760px; --nav-h:60px; --subnav-h:49px; --toc-w:248px;
+  --shadow:0 1px 2px rgba(14,17,22,.06), 0 8px 24px rgba(14,17,22,.05);
+}
+
+/* Dark theme — re-maps role tokens only. Literal brand demos (swatches, palette,
+   logo-on-background tiles, mockups, charts) use hardcoded hex and DO NOT invert. */
+:root[data-theme="dark"] {
+  --bg:#0E1116; --bg-soft:#14181F; --bg-muted:#1A1F27; --surface:#181D25; --surface-raised:#222A36;
+  --text:#F7F9FC; --text-soft:#C2CAD6; --text-mut:#909AAA;
+  --line:#262C36; --line-strong:#3A424E;
+  --brand:#4F6FEE; --brand-50:rgba(79,111,238,.16); --brand-100:rgba(79,111,238,.32);
+  --brand-200:rgba(126,153,246,.45); --brand-600:#6E8BF2; --brand-700:#ADC0FB;
+  --accent:#4F6FEE; --accent-ink:#7E99F6;
+  --nav-bg:rgba(14,17,22,.82); --subnav-bg:rgba(14,17,22,.9);
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 8px 24px rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+
+/* Metric-adjusted fallback faces — keep the layout box identical when brand
+   fonts are loading or fail, to avoid layout shift (CLS).
+   Inter→Arial values verified; Grotesk/Mono are starting values to regenerate
+   against the self-hosted woff2 (Fontaine / @capsizecss/unpack) if self-hosting. */
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial');
+  size-adjust: 107.64%;
+  ascent-override: 90.44%;
+  descent-override: 22.52%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Space Grotesk Fallback';
+  src: local('Arial');
+  size-adjust: 100%;
+  ascent-override: 92%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Space Mono Fallback';
+  src: local('Menlo'), local('Consolas'), local('Courier New');
+  size-adjust: 96%;
+  ascent-override: 102%;
+  descent-override: 32%;
+  line-gap-override: 0%;
+}

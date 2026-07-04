@@ -1,0 +1,20 @@
+{
+  "$comment": "Sample MCP server config exposing Meridian brand assets to AI agents. Adjust command/path to your environment.",
+  "mcpServers": {
+    "meridian-brand": {
+      "command": "npx",
+      "args": ["-y", "@meridian/brand-assets-mcp"],
+      "env": {
+        "MERIDIAN_TOKENS": "./meridian.tokens.json",
+        "MERIDIAN_VOICE": "./meridian-voice.md"
+      },
+      "tools": [
+        "get_color_token",
+        "get_type_scale",
+        "get_logo_svg",
+        "get_voice_prompt",
+        "check_contrast"
+      ]
+    }
+  }
+}

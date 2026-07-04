@@ -1,0 +1,34 @@
+# Meridian
+
+> Meridian is a fictional neutral demo brand used to showcase a complete, bilingual (ES/EN) Brand Guidelines template. Tagline: "Aligned by design."
+
+This file gives AI tools the brand context needed to create on-brand content. Keep it consistent with the full guidelines.
+
+## Strategic foundation
+- Purpose (the why, timeless): We exist so any team can create with the consistency of a great brand.
+- Vision (the where): Be the reference point that aligns brand, product, and communication.
+- Mission (the what, today): Help every team create with clarity and confidence.
+- Values (the how): Clarity, Rigor, Warmth.
+- Positioning: For fast-growing teams, Meridian is the brand system that keeps everything aligned — from strategy to the last application.
+
+## Voice and tone
+- Voice (constant): clear, confident, human.
+- Be direct, not simplistic; assured, not arrogant; warm, not overly casual.
+- Tone flexes with the reader's context and emotional state.
+- Avoid jargon and hype. Use short sentences, second person, plain words.
+
+## Style
+- Sentence case for titles and UI.
+- Active voice. Numbers zero–nine in words, 10+ as numerals.
+- No ALL CAPS; use weight to emphasize.
+
+## Visual identity
+- Primary color: Cobalt #2348E0. Ink #0E1116. Surface (Mist) #EEF1F5.
+- Display typeface: Space Grotesk. Body: Inter. Mono: Space Mono.
+- Logo: wordmark + circular "meridian" symbol. Never stretch, recolor, rotate, or add effects.
+
+## Resources
+- Design tokens (W3C): meridian.tokens.json
+- Tailwind preset: meridian.tailwind.js
+- Brand voice system prompt: meridian-voice.md
+- Color reference: meridian-colors.json

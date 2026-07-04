@@ -1,0 +1,18 @@
+{
+  "brand": "Meridian",
+  "direction": "B · Swiss systematic",
+  "colors": [
+    { "name": "Cobalt", "role": "Primary / action", "hex": "#2348E0", "rgb": [35, 72, 224], "cmyk": [84, 68, 0, 12], "pantone": "2728 C", "wcagOnWhite": "6.8:1 (AA)" },
+    { "name": "Ink", "role": "Text / dark surfaces", "hex": "#0E1116", "rgb": [14, 17, 22], "cmyk": [36, 23, 0, 91], "pantone": "Black 6 C", "wcagOnWhite": "16:1 (AAA)" },
+    { "name": "Mist", "role": "Cool surface", "hex": "#EEF1F5", "rgb": [238, 241, 245], "cmyk": [3, 1, 0, 4], "pantone": "Cool Gray 1 C" }
+  ],
+  "brandScale": {
+    "50": "#EEF2FE", "100": "#D6E0FD", "200": "#ADC0FB", "300": "#7E99F6", "400": "#4F6FEE",
+    "500": "#2348E0", "600": "#1B39B8", "700": "#162E93", "800": "#142772", "900": "#0E1B4D"
+  },
+  "neutral": {
+    "0": "#FFFFFF", "50": "#F7F9FC", "100": "#EEF1F5", "200": "#E0E5EC", "300": "#CBD2DC", "400": "#9AA3B2",
+    "500": "#6B7280", "600": "#4B5563", "700": "#353B45", "800": "#1E232B", "900": "#0E1116"
+  },
+  "semantic": { "success": "#1A8F5E", "warning": "#C77A11", "danger": "#D03A3A" }
+}

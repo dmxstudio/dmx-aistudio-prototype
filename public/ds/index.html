@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>(function(){try{var t=localStorage.getItem('meridian-ds-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);
+    // DMXAiStudio feed: ?brand=<id> aplica los tokens de marca (dmxds:<id>) FOUC-free + nombre.
+    var b=new URLSearchParams(location.search).get('brand');
+    var p=b?(JSON.parse(localStorage.getItem('dmxds:'+b)||'{}')||{}):{};
+    window.__DS=p; window.__DSBRAND=(p.config&&p.config.brand)||'Meridian';
+    window.__applyDSTokens=function(th){var d=Object.assign({},p.tokens||{},th==='dark'?(p.tokensDark||{}):{});for(var k in d)document.documentElement.style.setProperty(k,d[k]);};
+    if(p.tokens)window.__applyDSTokens(t);
+    if(p.fonts&&p.fonts.length){var l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?'+p.fonts.map(function(f){return 'family='+encodeURIComponent(f).replace(/%20/g,'+')+':wght@400;500;700';}).join('&')+'&display=swap';document.head.appendChild(l);}
+  }catch(e){}})();</script>
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0E1116" media="(prefers-color-scheme: dark)">
+  <title>Meridian · Design System Guidelines</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body id="top" data-page="design-system">
+  <a class="skip" href="#main">Saltar al contenido</a>
+  <header id="site-nav" class="site-nav" data-component="site-nav">
+    <div class="nav-in">
+      <a class="brand" href="#main" aria-label="Meridian Design System">
+        <svg class="mk" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="var(--brand-500,#2348E0)"/><rect x="4" y="17.6" width="32" height="4.8" fill="#fff"/><rect x="17.6" y="5" width="4.8" height="9" fill="#fff"/></svg>
+        <span>Meridian</span>
+      </a>
+      <nav class="nav-links" id="nav-links" aria-label="Design system">
+        <a class="active" href="#overview" aria-current="page"><i class="ti ti-palette" aria-hidden="true"></i><span class="pn">00</span><span>Design System</span></a>
+      </nav>
+      <button class="theme-btn" type="button" data-theme-toggle aria-label="Cambiar a oscuro"><i class="ti ti-moon" aria-hidden="true"></i></button>
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button data-lang="es" type="button">ES</button>
+        <button data-lang="en" type="button">EN</button>
+      </div>
+      <button class="menu-btn" type="button" aria-label="Menú" aria-controls="nav-links" aria-expanded="false"><i class="ti ti-menu-2" aria-hidden="true"></i></button>
+    </div>
+  </header>
+
+  <nav class="subnav" aria-label="En esta página" data-component="subnav">
+    <div class="subnav-in">
+      <a class="active" href="#overview" data-sec="overview"><span class="tn">00</span><span>Overview</span></a>
+      <a href="#tokens" data-sec="tokens"><span class="tn">01</span><span>Tokens</span></a>
+      <a href="#brand-inheritance" data-sec="brand-inheritance"><span class="tn">02</span><span>Brand guide</span></a>
+      <a href="#atoms" data-sec="atoms"><span class="tn">03</span><span>Átomos</span></a>
+      <a href="#molecules" data-sec="molecules"><span class="tn">04</span><span>Moléculas</span></a>
+      <a href="#components" data-sec="components"><span class="tn">05</span><span>Componentes</span></a>
+      <a href="#layouts" data-sec="layouts"><span class="tn">06</span><span>Layouts</span></a>
+      <a href="#motion-z" data-sec="motion-z"><span class="tn">07</span><span>Motion</span></a>
+      <a href="#handoff" data-sec="handoff"><span class="tn">08</span><span>Handoff</span></a>
+    </div>
+  </nav>
+
+  <main id="main" class="content">
+    <header class="page-head" id="overview">
+      <svg class="mk-lg" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="15" fill="var(--brand-500,#2348E0)"/><rect x="4" y="17.6" width="32" height="4.8" fill="#fff"/><rect x="17.6" y="5" width="4.8" height="9" fill="#fff"/></svg>
+      <p class="tagline">Aligned by design</p>
+      <h1>Design System Guidelines</h1>
+      <p class="lead">Repositorio independiente para convertir la identidad Meridian en un sistema de producto: tokens DTCG/OpenPencil, componentes documentados, estados accesibles y patrones listos para Figma/Pencil.dev.</p>
+      <div class="meta-row" data-component="system-snapshot">
+        <div class="m"><b>Versión</b>v0.1</div>
+        <div class="m"><b>Actualizado</b>2026-06</div>
+        <div class="m"><b>Propietario</b>Equipo de marca</div>
+        <div class="m"><b>secciones</b>8</div>
+      </div>
+      <div class="system-metrics" data-component="system-snapshot" aria-label="Resumen del design system">
+        <article><b>3</b><span>capas de tokens</span></article>
+        <article><b>8</b><span>secciones auditables</span></article>
+        <article><b>26</b><span>component examples</span></article>
+        <article><b>AA</b><span>contraste por estado</span></article>
+      </div>
+    </header>
+
+    <section id="tokens" data-tier="core" aria-labelledby="tokens-title">
+      <div class="sec-head">
+        <span class="sec-num">1.1</span>
+        <h2 id="tokens-title">Arquitectura de tokens</h2>
+        <span class="sec-en">Primitive → Semantic → Component</span>
+        <span class="tier"><span class="tdot t-core"></span>core</span>
+      </div>
+      <p class="purpose">La capa primitive trae valores del brand guide; semantic asigna intención por modo; component fija decisiones por UI. Esto permite que Figma, Pencil.dev y CSS consuman el mismo contrato.</p>
+      <div class="cols cols-3 mt6">
+        <article class="ds-card" data-component="token-layer" data-layer="primitive">
+          <div class="token-badge">01</div>
+          <h3>Primitive</h3>
+          <p>Color brand/neutral, tipografía, espacio, radio, shadow, motion, z-index.</p>
+          <code>color.primitive.brand.500</code>
+        </article>
+        <article class="ds-card" data-component="token-layer" data-layer="semantic">
+          <div class="token-badge">02</div>
+          <h3>Semantic</h3>
+          <p>Roles de interfaz: fondo, superficie, texto, borde, acción, foco, status.</p>
+          <code>color.semantic.action.primary.background.default</code>
+        </article>
+        <article class="ds-card" data-component="token-layer" data-layer="component">
+          <div class="token-badge">03</div>
+          <h3>Component</h3>
+          <p>Button, input, card, badge, modal y navegación con estados explícitos.</p>
+          <code>component.button.primary.background.hover</code>
+        </article>
+      </div>
+      <div class="table-scroll mt6">
+        <table class="spec" data-component="token-mode-table">
+          <thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Uso</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="mono">background.default</td>
+              <td><span class="token-value"><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code></span></td>
+              <td><span class="token-value"><span class="swatch" style="background:#0E1116"></span><code>#0E1116</code></span></td>
+              <td>Canvas base</td>
+            </tr>
+            <tr>
+              <td class="mono">surface.default</td>
+              <td><span class="token-value"><span class="swatch" style="background:#FFFFFF"></span><code>#FFFFFF</code></span></td>
+              <td><span class="token-value"><span class="swatch" style="background:#181D25"></span><code>#181D25</code></span></td>
+              <td>Cards, modals, tables</td>
+            </tr>
+            <tr>
+              <td class="mono">text.primary</td>
+              <td><span class="token-value"><span class="swatch" style="background:#0E1116"></span><code>#0E1116</code></span></td>
+              <td><span class="token-value"><span class="swatch" style="background:#F7F9FC"></span><code>#F7F9FC</code></span></td>
+              <td>Lectura principal</td>
+            </tr>
+            <tr>
+              <td class="mono">action.primary.bg</td>
+              <td><span class="token-value"><span class="swatch" style="background:#2348E0"></span><code>#2348E0</code></span></td>
+              <td><span class="token-value"><span class="swatch" style="background:#4F6FEE"></span><code>#4F6FEE</code></span></td>
+              <td>CTA, focusable actions</td>
+            </tr>
+            <tr>
+              <td class="mono">focus.ring</td>
+              <td><span class="token-value"><span class="swatch" style="background:rgba(35,72,224,.28)"></span><code>rgba(35,72,224,.28)</code></span></td>
+              <td><span class="token-value"><span class="swatch" style="background:rgba(126,153,246,.34)"></span><code>rgba(126,153,246,.34)</code></span></td>
+              <td>Teclado y accesibilidad</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="brand-inheritance" data-tier="core" aria-labelledby="brand-title">
+      <div class="sec-head">
+        <span class="sec-num">2.1</span>
+        <h2 id="brand-title">Secciones heredadas del brand guide</h2>
+        <span class="sec-en">Validated and integrated</span>
+        <span class="tier"><span class="tdot t-core"></span>core</span>
+      </div>
+      <p class="purpose">El design system no copia el brand book completo: integra las secciones que gobiernan UI y handoff. Estrategia, voz, aplicaciones físicas y legal permanecen en el brand guide; color, tipografía, accesibilidad, dark mode, iconografía, grid, motion y data-viz viven aquí como reglas operativas.</p>
+      <div class="chapter-list mt6">
+        <article data-component="brand-section-map"><span class="sec-num">3.4</span><h3>Color palette</h3><p>Escalas brand/neutral, pares AA y roles semánticos para light/dark.</p></article>
+        <article data-component="brand-section-map"><span class="sec-num">3.5</span><h3>Typography</h3><p>Space Grotesk, Inter y Space Mono convertidas a tokens de texto y estilos.</p></article>
+        <article data-component="brand-section-map"><span class="sec-num">3.6</span><h3>Accessibility</h3><p>Contraste, foco visible, ARIA y estados no dependientes sólo de color.</p></article>
+        <article data-component="brand-section-map"><span class="sec-num">3.7</span><h3>Dark mode</h3><p>Re-mapeo por roles, sin inversión literal de assets ni swatches.</p></article>
+        <article data-component="brand-section-map"><span class="sec-num">3.8</span><h3>Iconography</h3><p>Tabler-style outline, grid de 24 px, stroke 2 px y tamaños 16/20/24.</p></article>
+        <article data-component="brand-section-map"><span class="sec-num">3.12</span><h3>Grid & spacing</h3><p>Escala 8pt, contenedores, gutters y breakpoints para producto.</p></article>
+        <article data-component="brand-section-map"><span class="sec-num">3.13</span><h3>Motion</h3><p>Duración, easing, reduced motion y estados loading.</p></article>
+        <article data-component="brand-section-map"><span class="sec-num">3.14</span><h3>Data visualization</h3><p>Series, leyendas y estados de tabla/reportes sin depender sólo de color.</p></article>
+      </div>
+    </section>
+
+    <section id="atoms" data-tier="core" aria-labelledby="atoms-title">
+      <div class="sec-head">
+        <span class="sec-num">3.1</span>
+        <h2 id="atoms-title">Átomos</h2>
+        <span class="sec-en">Color, type, space, shape, depth, icon</span>
+        <span class="tier"><span class="tdot t-core"></span>core</span>
+      </div>
+      <p class="purpose">Los átomos son las variables que Figma debe importar como primitives y que CSS consume como custom properties. Cada átomo muestra token path, valor visual, tipo DTCG y scope de uso.</p>
+      <div class="atom-overview mt6" aria-label="Resumen de átomos">
+        <span><b>Color</b><small>brand, neutral, status</small></span>
+        <span><b>Type</b><small>familias y jerarquía</small></span>
+        <span><b>Space</b><small>escala 4-96 px</small></span>
+        <span><b>Shape</b><small>radius + border</small></span>
+        <span><b>Depth</b><small>shadow + opacity</small></span>
+        <span><b>Icon</b><small>16, 20, 24 px</small></span>
+      </div>
+      <div class="ds-grid mt6">
+        <article class="ds-panel wide" data-component="color-scale" aria-labelledby="color-scale-title">
+          <div class="panel-head"><h3 id="color-scale-title">Color primitives</h3><button class="fchip" type="button" data-copy="color.primitive.brand.500"><i class="ti ti-copy" aria-hidden="true"></i> token</button></div>
+          <div class="atom-color-sets">
+            <div>
+              <p class="label">Brand cobalt</p>
+              <div class="tonal ds-tonal" aria-label="Escala cobalt">
+                <span style="background:#EEF2FE;color:#162E93">50</span><span style="background:#D6E0FD;color:#162E93">100</span><span style="background:#ADC0FB;color:#162E93">200</span><span style="background:#7E99F6;color:#fff">300</span><span style="background:#4F6FEE;color:#fff">400</span><span style="background:#2348E0;color:#fff">500</span><span style="background:#1B39B8;color:#fff">600</span><span style="background:#162E93;color:#fff">700</span><span style="background:#142772;color:#fff">800</span><span style="background:#0E1B4D;color:#fff">900</span>
+              </div>
+            </div>
+            <div>
+              <p class="label">Neutral scale</p>
+              <div class="tonal ds-tonal" aria-label="Escala neutral">
+                <span style="background:#FFFFFF;color:#353B45">0</span><span style="background:#F7F9FC;color:#353B45">50</span><span style="background:#EEF1F5;color:#353B45">100</span><span style="background:#E0E5EC;color:#353B45">200</span><span style="background:#CBD2DC;color:#353B45">300</span><span style="background:#9AA3B2;color:#fff">400</span><span style="background:#6B7280;color:#fff">500</span><span style="background:#4B5563;color:#fff">600</span><span style="background:#353B45;color:#fff">700</span><span style="background:#1E232B;color:#fff">800</span><span style="background:#0E1116;color:#fff">900</span>
+              </div>
+            </div>
+          </div>
+          <div class="status-row" aria-label="Colores de estado">
+            <span style="--c:#1A8F5E"><i aria-hidden="true"></i><b>success</b><code>#1A8F5E</code></span>
+            <span style="--c:#C77A11"><i aria-hidden="true"></i><b>warning</b><code>#C77A11</code></span>
+            <span style="--c:#D03A3A"><i aria-hidden="true"></i><b>danger</b><code>#D03A3A</code></span>
+            <span style="--c:#2348E0"><i aria-hidden="true"></i><b>info</b><code>#2348E0</code></span>
+          </div>
+        </article>
+        <article class="ds-panel" data-component="type-scale">
+          <h3>Type scale</h3>
+          <div class="type-spec display"><span>Aa</span><div><b>Display</b><code>72 / 1.08 · Space Grotesk Bold</code></div></div>
+          <div class="type-spec heading"><span>Aa</span><div><b>Heading</b><code>48, 34, 24 · Space Grotesk Bold</code></div></div>
+          <div class="type-spec body"><span>Aa</span><div><b>Body</b><code>16 / 1.55 · Inter Regular</code></div></div>
+          <div class="type-spec mono"><span>01</span><div><b>Mono</b><code>12-14 · Space Mono</code></div></div>
+        </article>
+        <article class="ds-panel" data-component="spacing-scale">
+          <h3>Spacing 8pt</h3>
+          <div class="spacing-scale expanded">
+            <div class="sp"><div class="bar" style="height:4px"></div><div class="v">1<code>4px</code></div></div><div class="sp"><div class="bar" style="height:8px"></div><div class="v">2<code>8px</code></div></div><div class="sp"><div class="bar" style="height:12px"></div><div class="v">3<code>12px</code></div></div><div class="sp"><div class="bar" style="height:16px"></div><div class="v">4<code>16px</code></div></div><div class="sp"><div class="bar" style="height:24px"></div><div class="v">5<code>24px</code></div></div><div class="sp"><div class="bar" style="height:32px"></div><div class="v">6<code>32px</code></div></div><div class="sp"><div class="bar" style="height:48px"></div><div class="v">7<code>48px</code></div></div><div class="sp"><div class="bar" style="height:64px"></div><div class="v">8<code>64px</code></div></div><div class="sp"><div class="bar" style="height:96px"></div><div class="v">9<code>96px</code></div></div>
+          </div>
+          <p class="atom-note">Gaps, padding, gutters y ritmos verticales salen de esta escala.</p>
+        </article>
+        <article class="ds-panel" data-component="radius-elevation">
+          <h3>Radius + elevation</h3>
+          <div class="radius-demo"><span style="--r:6px">sm<code>6</code></span><span style="--r:10px">md<code>10</code></span><span style="--r:16px">lg<code>16</code></span><span style="--r:999px">full</span></div>
+          <div class="elevation-demo"><span><b>1</b><small>cards</small></span><span><b>2</b><small>popover</small></span><span><b>3</b><small>modal</small></span></div>
+        </article>
+        <article class="ds-panel">
+          <h3>Icon atoms</h3>
+          <div class="icon-scale" aria-label="Tamaños de iconos">
+            <span><i class="ti ti-sparkles ico-sm" aria-hidden="true"></i><code>16px</code></span>
+            <span><i class="ti ti-settings ico-md" aria-hidden="true"></i><code>20px</code></span>
+            <span><i class="ti ti-layout-grid ico-lg" aria-hidden="true"></i><code>24px</code></span>
+          </div>
+          <p class="atom-note">Grid 24 px, stroke 2 px, outline sin rellenos decorativos.</p>
+        </article>
+        <article class="ds-panel">
+          <h3>Border + opacity</h3>
+          <div class="border-scale">
+            <span style="--bw:1px"><b>default</b><code>1px</code></span>
+            <span style="--bw:2px"><b>strong</b><code>2px</code></span>
+          </div>
+          <div class="opacity-scale">
+            <span style="opacity:.45">disabled .45</span>
+            <span>overlay .68</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="molecules" data-tier="core" aria-labelledby="molecules-title">
+      <div class="sec-head">
+        <span class="sec-num">4.1</span>
+        <h2 id="molecules-title">Moléculas</h2>
+        <span class="sec-en">Small reusable patterns</span>
+        <span class="tier"><span class="tdot t-core"></span>core</span>
+      </div>
+      <p class="purpose">Cada molécula documenta variantes, estados, ARIA y el token responsable de cada decisión visual. Los ejemplos usan `data-component` para que agentes puedan parsearlos.</p>
+      <div class="cols cols-2 mt6">
+        <article class="ds-panel" data-component="button-group" aria-labelledby="buttons-title">
+          <h3 id="buttons-title">Buttons</h3>
+          <div class="button-row">
+            <button class="btn btn-primary" type="button">Primary</button>
+            <button class="btn" type="button">Secondary</button>
+            <button class="btn btn-ghost" type="button">Ghost</button>
+          </div>
+          <div class="state-row" aria-label="Estados de botón">
+            <button class="btn btn-primary is-hover" type="button">Hover</button>
+            <button class="btn btn-primary is-focus" type="button">Focus</button>
+            <button class="btn btn-primary" type="button" disabled>Disabled</button>
+          </div>
+        </article>
+        <article class="ds-panel" data-component="field" aria-labelledby="field-title">
+          <h3 id="field-title">Field</h3>
+          <label class="field"><span>Email</span><input type="email" value="equipo@meridian.example" aria-describedby="email-help"><small id="email-help">Se usa para aprobaciones y handoff.</small></label>
+          <label class="field error"><span>Token path</span><input value="component.button.primary.bg" aria-invalid="true" aria-describedby="token-error"><small id="token-error">Falta el estado final: default, hover o disabled.</small></label>
+        </article>
+        <article class="ds-panel" data-component="tabs" aria-labelledby="tabs-title">
+          <h3 id="tabs-title">Tabs</h3>
+          <div class="tabs" role="tablist" aria-label="Token layers">
+            <button role="tab" aria-selected="true" type="button">Primitive</button><button role="tab" aria-selected="false" type="button">Semantic</button><button role="tab" aria-selected="false" type="button">Component</button>
+          </div>
+          <div class="tab-panel" role="tabpanel">color.semantic.text.primary → color.primitive.neutral.900</div>
+        </article>
+        <article class="ds-panel" data-component="alert" aria-labelledby="alert-title">
+          <h3 id="alert-title">Alerts</h3>
+          <div class="alert info" role="status"><i class="ti ti-info-circle" aria-hidden="true"></i> Tokens exportados para Figma y Pencil.dev.</div>
+          <div class="alert danger" role="alert"><i class="ti ti-alert-triangle" aria-hidden="true"></i> Alias roto: revisa la referencia antes del build.</div>
+        </article>
+      </div>
+    </section>
+
+    <section id="components" data-tier="core" aria-labelledby="components-title">
+      <div class="sec-head">
+        <span class="sec-num">5.1</span>
+        <h2 id="components-title">Componentes</h2>
+        <span class="sec-en">Product UI examples</span>
+        <span class="tier"><span class="tdot t-core"></span>core</span>
+      </div>
+      <p class="purpose">Los componentes están pensados para SaaS/admin: densos, escaneables, sin composición de marketing. Cada uno expone estructura y estados suficientes para implementación.</p>
+      <div class="component-grid mt6">
+        <article class="product-card" data-component="card" aria-labelledby="card-title">
+          <span class="chip-tag">Approved</span>
+          <h3 id="card-title">Release checklist</h3>
+          <p>Generación, tokens, accesibilidad y handoff listos para publicar.</p>
+          <div class="progress" aria-label="Progreso 78%"><span style="width:78%"></span></div>
+        </article>
+        <article class="modal-demo" data-component="modal" role="dialog" aria-labelledby="modal-title" aria-modal="false">
+          <div class="modal-surface">
+            <div class="modal-head"><h3 id="modal-title">Publish tokens</h3><button class="theme-btn mini" type="button" aria-label="Cerrar"><i class="ti ti-x" aria-hidden="true"></i></button></div>
+            <p>La librería se versionará como <span class="mono">meridian-ds@0.1.0</span>.</p>
+            <div class="button-row"><button class="btn" type="button">Cancelar</button><button class="btn btn-primary" type="button">Publicar</button></div>
+          </div>
+        </article>
+        <article class="data-table" data-component="table" aria-labelledby="table-title">
+          <h3 id="table-title">Token audit</h3>
+          <div class="table-scroll"><table class="spec audit-table"><thead><tr><th>Token</th><th>Tipo</th><th>Modo</th><th>Estado</th></tr></thead><tbody>
+            <tr><td><span class="token-cell"><span class="token-dot color"></span><span><b>action.primary.bg</b><small>component.button.primary.background</small></span></span></td><td><span class="type-pill color">color</span></td><td><span class="mode-set"><span>light</span><span>dark</span></span></td><td><span class="audit-state ok"><i class="ti ti-circle-check" aria-hidden="true"></i>ok</span></td></tr>
+            <tr><td><span class="token-cell"><span class="token-dot danger"></span><span><b>input.border.error</b><small>component.input.border.error</small></span></span></td><td><span class="type-pill color">color</span></td><td><span class="mode-set"><span>global</span></span></td><td><span class="audit-state ok"><i class="ti ti-circle-check" aria-hidden="true"></i>ok</span></td></tr>
+            <tr><td><span class="token-cell"><span class="token-dot motion"></span><span><b>motion.duration.fast</b><small>duration.fast</small></span></span></td><td><span class="type-pill duration">duration</span></td><td><span class="mode-set"><span>global</span></span></td><td><span class="audit-state ok"><i class="ti ti-circle-check" aria-hidden="true"></i>ok</span></td></tr>
+          </tbody></table></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="layouts" data-tier="rec" aria-labelledby="layouts-title">
+      <div class="sec-head">
+        <span class="sec-num">6.1</span>
+        <h2 id="layouts-title">Layouts</h2>
+        <span class="sec-en">Responsive product composition</span>
+        <span class="tier"><span class="tdot t-rec"></span>rec</span>
+      </div>
+      <p class="purpose">Los layouts traducen la sección de grid/espaciado del brand guide a patrones de producto: navegación lateral, superficies de tabla, formularios y documentación.</p>
+      <div class="layout-grid mt6">
+        <article class="layout-frame dashboard" data-component="layout-dashboard" aria-label="Dashboard layout"><span></span><div><i></i><i></i><i></i><i></i></div></article>
+        <article class="layout-frame editorial" data-component="layout-editorial" aria-label="Editorial layout"><i></i><i></i><i></i></article>
+        <article class="layout-frame form" data-component="layout-form" aria-label="Form layout"><i></i><i></i><i></i><i></i></article>
+      </div>
+      <div class="breakpoint-grid mt6" aria-label="Breakpoints responsive">
+        <article><div class="bp-head"><b>sm</b><code>640</code></div><div class="bp-frame" style="--cols:1;--w:42%"><span></span></div><dl><div><dt>Container</dt><dd>100% - 32</dd></div><div><dt>Grid</dt><dd>1 col</dd></div><div><dt>Uso</dt><dd>Mobile forms</dd></div></dl></article>
+        <article><div class="bp-head"><b>md</b><code>768</code></div><div class="bp-frame" style="--cols:6;--w:58%"><span></span><span></span><span></span><span></span><span></span><span></span></div><dl><div><dt>Container</dt><dd>720</dd></div><div><dt>Grid</dt><dd>6 col</dd></div><div><dt>Uso</dt><dd>Tablet docs</dd></div></dl></article>
+        <article><div class="bp-head"><b>lg</b><code>1024</code></div><div class="bp-frame" style="--cols:12;--w:78%"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><dl><div><dt>Container</dt><dd>960</dd></div><div><dt>Grid</dt><dd>12 col</dd></div><div><dt>Uso</dt><dd>Dashboard</dd></div></dl></article>
+        <article><div class="bp-head"><b>xl</b><code>1200</code></div><div class="bp-frame" style="--cols:12;--w:100%"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><dl><div><dt>Container</dt><dd>1200</dd></div><div><dt>Grid</dt><dd>12 col</dd></div><div><dt>Uso</dt><dd>Desktop workspace</dd></div></dl></article>
+      </div>
+    </section>
+
+    <section id="motion-z" data-tier="rec" aria-labelledby="motion-title">
+      <div class="sec-head">
+        <span class="sec-num">7.1</span>
+        <h2 id="motion-title">Motion, z-index y estados</h2>
+        <span class="sec-en">Interaction system</span>
+        <span class="tier"><span class="tdot t-rec"></span>rec</span>
+      </div>
+      <p class="purpose">La guía de motion se vuelve tokens de duración/easing; z-index evita stacks arbitrarios; los estados garantizan que hover/focus/disabled/loading/error tengan definición visible y accesible.</p>
+      <div class="cols cols-3 mt6">
+        <article class="ds-panel" data-component="motion-scale"><h3>Motion</h3><div class="motion-demo"><div class="dot"></div></div><p>fast 120ms · base 180ms · slow 280ms · easing standard cubic-bezier(.2,.8,.2,1).</p></article>
+        <article class="ds-panel" data-component="z-index-scale"><h3>Z-index</h3><div class="z-stack"><span>base 0</span><span>sticky 100</span><span>overlay 800</span><span>modal 900</span><span>toast 1000</span></div></article>
+        <article class="ds-panel" data-component="state-matrix"><h3>State matrix</h3><div class="state-list"><button class="btn btn-primary" type="button">Default</button><button class="btn btn-primary is-hover" type="button">Hover</button><button class="btn btn-primary is-focus" type="button">Focus</button><button class="btn btn-primary" type="button" disabled>Disabled</button><button class="btn btn-primary loading" type="button" aria-busy="true">Loading</button><input class="input-error" value="Error" aria-invalid="true"></div></article>
+      </div>
+    </section>
+
+    <section id="handoff" data-tier="core" aria-labelledby="handoff-title">
+      <div class="sec-head">
+        <span class="sec-num">8.1</span>
+        <h2 id="handoff-title">Exportación y handoff</h2>
+        <span class="sec-en">Figma / Pencil.dev / code</span>
+        <span class="tier"><span class="tdot t-core"></span>core</span>
+      </div>
+      <p class="purpose">El contrato vive en <span class="mono">design-tokens.json</span>: formato DTCG, metadata Figma y extensiones OpenPencil. El build valida aliases, secciones y ejemplos `data-component`.</p>
+      <div class="cols cols-3 mt6">
+        <article class="ds-card" data-component="export-contract"><i class="ti ti-braces" aria-hidden="true"></i><h3>DTCG</h3><p><span class="mono">$type</span>, <span class="mono">$value</span>, alias y descripciones.</p></article>
+        <article class="ds-card" data-component="figma-contract"><i class="ti ti-brand-figma" aria-hidden="true"></i><h3>Figma</h3><p>Collections, modes, scopes y code syntax para variables.</p></article>
+        <article class="ds-card" data-component="openpencil-contract"><i class="ti ti-pencil" aria-hidden="true"></i><h3>OpenPencil</h3><p>Manifest de componentes, estados, ARIA y atributos para agentes.</p></article>
+      </div>
+      <pre class="code-block" tabindex="0"><code>{
+  "component.button.primary.background.default": "{color.semantic.action.primary.background.default}",
+  "component.button.primary.background.hover": "{color.semantic.action.primary.background.hover}",
+  "component.button.primary.focus.ring": "{color.semantic.focus.ring}"
+}</code></pre>
+      <div class="filechips mt6">
+        <a class="fchip" href="design-tokens.json" download><i class="ti ti-download" aria-hidden="true"></i> design-tokens.json</a>
+        <span class="fchip"><i class="ti ti-check" aria-hidden="true"></i> npm run build</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pager" id="pager">
+    <a href="#top"><span class="dir"><i class="ti ti-arrow-up" aria-hidden="true"></i> Inicio</span><span class="tt">Meridian Design System</span></a>
+    <a class="nx" href="design-tokens.json" download><span class="dir">Descargar <i class="ti ti-download" aria-hidden="true"></i></span><span class="tt">design-tokens.json</span></a>
+  </footer>
+  <button id="to-top" class="to-top" type="button" aria-label="Volver arriba"><i class="ti ti-arrow-up" aria-hidden="true"></i></button>
+  <div class="toast" role="status" aria-live="polite" data-toast>Copiado</div>
+  <script src="assets/app.js"></script>
+  <script src="assets/config.js"></script>
+</body>
+</html>

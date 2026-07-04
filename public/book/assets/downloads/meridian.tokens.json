@@ -1,0 +1,64 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "Meridian brand design tokens — W3C format. Dirección B · Swiss systematic.",
+  "color": {
+    "brand": { "$type": "color", "$value": "#2348E0", "$description": "Cobalt — primary / action" },
+    "brand-ink": { "$type": "color", "$value": "#162E93" },
+    "ink": { "$type": "color", "$value": "#0E1116", "$description": "Text / dark surfaces" },
+    "mist": { "$type": "color", "$value": "#EEF1F5", "$description": "Cool surface" },
+    "brand-scale": {
+      "50": { "$type": "color", "$value": "#EEF2FE" },
+      "100": { "$type": "color", "$value": "#D6E0FD" },
+      "200": { "$type": "color", "$value": "#ADC0FB" },
+      "300": { "$type": "color", "$value": "#7E99F6" },
+      "400": { "$type": "color", "$value": "#4F6FEE" },
+      "500": { "$type": "color", "$value": "#2348E0" },
+      "600": { "$type": "color", "$value": "#1B39B8" },
+      "700": { "$type": "color", "$value": "#162E93" },
+      "800": { "$type": "color", "$value": "#142772" },
+      "900": { "$type": "color", "$value": "#0E1B4D" }
+    },
+    "neutral": {
+      "0": { "$type": "color", "$value": "#FFFFFF" },
+      "50": { "$type": "color", "$value": "#F7F9FC" },
+      "100": { "$type": "color", "$value": "#EEF1F5" },
+      "200": { "$type": "color", "$value": "#E0E5EC" },
+      "300": { "$type": "color", "$value": "#CBD2DC" },
+      "400": { "$type": "color", "$value": "#9AA3B2" },
+      "500": { "$type": "color", "$value": "#6B7280" },
+      "600": { "$type": "color", "$value": "#4B5563" },
+      "700": { "$type": "color", "$value": "#353B45" },
+      "800": { "$type": "color", "$value": "#1E232B" },
+      "900": { "$type": "color", "$value": "#0E1116" }
+    },
+    "semantic": {
+      "success": { "$type": "color", "$value": "#1A8F5E" },
+      "warning": { "$type": "color", "$value": "#C77A11" },
+      "danger": { "$type": "color", "$value": "#D03A3A" }
+    }
+  },
+  "fontFamily": {
+    "display": { "$type": "fontFamily", "$value": ["Space Grotesk", "system-ui", "sans-serif"] },
+    "text": { "$type": "fontFamily", "$value": ["Inter", "system-ui", "sans-serif"] },
+    "mono": { "$type": "fontFamily", "$value": ["Space Mono", "ui-monospace", "monospace"] }
+  },
+  "fontWeight": {
+    "regular": { "$type": "fontWeight", "$value": 400 },
+    "medium": { "$type": "fontWeight", "$value": 500 },
+    "bold": { "$type": "fontWeight", "$value": 700 }
+  },
+  "dimension": {
+    "space-1": { "$type": "dimension", "$value": "4px" },
+    "space-2": { "$type": "dimension", "$value": "8px" },
+    "space-3": { "$type": "dimension", "$value": "12px" },
+    "space-4": { "$type": "dimension", "$value": "16px" },
+    "space-5": { "$type": "dimension", "$value": "24px" },
+    "space-6": { "$type": "dimension", "$value": "32px" },
+    "space-7": { "$type": "dimension", "$value": "48px" },
+    "space-8": { "$type": "dimension", "$value": "64px" },
+    "space-9": { "$type": "dimension", "$value": "96px" },
+    "radius-sm": { "$type": "dimension", "$value": "6px" },
+    "radius-md": { "$type": "dimension", "$value": "10px" },
+    "radius-lg": { "$type": "dimension", "$value": "16px" }
+  }
+}

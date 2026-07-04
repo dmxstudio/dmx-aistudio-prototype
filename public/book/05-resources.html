@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>(function(){try{var t=localStorage.getItem('meridian-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);var b=new URLSearchParams(location.search).get('brand');var p=b?(JSON.parse(localStorage.getItem('dmxbook:'+b)||'{}')||{}):{};window.__applyBrandTokens=function(th){var d=Object.assign({},p.tokens||{},th==='dark'?(p.tokensDark||{}):{});for(var k in d)document.documentElement.style.setProperty(k,d[k]);};if(p.tokens)window.__applyBrandTokens(t);}catch(e){}})();</script>
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0E1116" media="(prefers-color-scheme: dark)">
+  <title>Meridian · Recursos y gobernanza</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/print.css" media="print">
+</head>
+<body data-page="resources">
+  <a class="skip" href="#main" data-i18n="ui.skip">Saltar al contenido</a>
+  <header id="site-nav"></header>
+
+  <div class="layout">
+    <aside id="sub-toc"></aside>
+    <main id="main" class="content">
+      <header class="page-head">
+        <div class="kicker"><span class="page-num">05</span><span data-i18n="pages.resources.kicker">Recursos y gobernanza</span></div>
+        <h1 data-i18n="pages.resources.title">Assets, legal y gobernanza</h1>
+        <p class="lead" data-i18n="pages.resources.lead">Todo para usar y mantener la marca.</p>
+      </header>
+
+      <section id="assets" data-tier="core">
+        <div class="sec-head"><span class="sec-num">5.1</span><h2 data-i18n="sections.assets">Biblioteca de assets y descargas</h2><span class="sec-en">Asset library &amp; downloads</span><span class="tier"><span class="tdot t-core"></span>core</span></div>
+        <p class="purpose" data-i18n="purpose.assets"></p>
+        <div class="label mt6" data-i18n="p3.dlFiles">Archivos</div>
+        <div class="dllist">
+          <a class="dlrow" href="assets/downloads/meridian-logo.svg" download><i class="ti ti-package ic" aria-hidden="true"></i><span class="nm">Meridian — Logo</span><span class="ty">.svg</span><span class="sz">2 KB</span><i class="ti ti-download" aria-hidden="true"></i></a>
+          <div class="dlrow demo"><i class="ti ti-typography ic" aria-hidden="true"></i><span class="nm">Space Grotesk + Inter</span><span class="ty">.zip</span><span class="sz">8.0 MB</span><i class="ti ti-download" aria-hidden="true"></i></div>
+          <a class="dlrow" href="assets/downloads/meridian-colors.json" download><i class="ti ti-palette ic" aria-hidden="true"></i><span class="nm">Color palette</span><span class="ty">.json</span><span class="sz">1 KB</span><i class="ti ti-download" aria-hidden="true"></i></a>
+          <div class="dlrow demo"><i class="ti ti-presentation ic" aria-hidden="true"></i><span class="nm">Plantillas (deck, social, email)</span><span class="ty">.zip</span><span class="sz">24 MB</span><i class="ti ti-download" aria-hidden="true"></i></div>
+          <a class="dlrow" href="#" onclick="window.print();return false;"><i class="ti ti-printer ic" aria-hidden="true"></i><span class="nm">Brand guidelines</span><span class="ty">PDF</span><span class="sz">print</span><i class="ti ti-download" aria-hidden="true"></i></a>
+        </div>
+        <div class="label mt6" data-i18n="p3.dlAI">IA, código y librerías</div>
+        <div class="dllist">
+          <div class="dlrow demo"><i class="ti ti-robot ic" aria-hidden="true"></i><span class="nm">AI Agent Skill</span><span class="ty">.zip</span><span class="sz">320 KB</span><i class="ti ti-download" aria-hidden="true"></i></div>
+          <div class="dlrow demo"><i class="ti ti-sparkles ic" aria-hidden="true"></i><span class="nm">Claude Design Skill</span><span class="ty">.zip</span><span class="sz">280 KB</span><i class="ti ti-download" aria-hidden="true"></i></div>
+          <a class="dlrow" href="assets/downloads/meridian.tokens.json" download><i class="ti ti-code ic" aria-hidden="true"></i><span class="nm" data-i18n="p3.tokens">Design tokens (W3C)</span><span class="ty">.json</span><span class="sz">2 KB</span><i class="ti ti-download" aria-hidden="true"></i></a>
+          <a class="dlrow" href="assets/downloads/meridian.formats.json" download><i class="ti ti-calendar-stats ic" aria-hidden="true"></i><span class="nm" data-i18n="fmt.fileLabel">Formatos de locale (config)</span><span class="ty">.json</span><span class="sz">1 KB</span><i class="ti ti-download" aria-hidden="true"></i></a>
+          <a class="dlrow" href="assets/downloads/meridian.dark.css" download><i class="ti ti-moon ic" aria-hidden="true"></i><span class="nm" data-i18n="dm.fileLabel">Tema oscuro (CSS)</span><span class="ty">.css</span><span class="sz">1 KB</span><i class="ti ti-download" aria-hidden="true"></i></a>
+          <a class="dlrow" href="assets/downloads/meridian-voice.md" download><i class="ti ti-message-2 ic" aria-hidden="true"></i><span class="nm" data-i18n="p3.voiceBlock">Voz de marca — system prompt</span><span class="ty">.md</span><span class="sz">2 KB</span><i class="ti ti-download" aria-hidden="true"></i></a>
+          <a class="dlrow" href="assets/downloads/llms.txt" download><i class="ti ti-file-description ic" aria-hidden="true"></i><span class="nm" data-i18n="p3.llmsTxt">Contexto de marca para LLMs</span><span class="ty">llms.txt</span><span class="sz">2 KB</span><i class="ti ti-download" aria-hidden="true"></i></a>
+          <a class="dlrow" href="assets/downloads/meridian.mcp.json" download><i class="ti ti-plug ic" aria-hidden="true"></i><span class="nm" data-i18n="p3.mcp">Conector MCP — assets de marca</span><span class="ty">.json</span><span class="sz">1 KB</span><i class="ti ti-download" aria-hidden="true"></i></a>
+          <a class="dlrow" href="assets/downloads/AGENTS.md" download><i class="ti ti-terminal-2 ic" aria-hidden="true"></i><span class="nm" data-i18n="p3.agentRules">Reglas para agentes (AGENTS.md / Cursor)</span><span class="ty">.md</span><span class="sz">2 KB</span><i class="ti ti-download" aria-hidden="true"></i></a>
+          <div class="dlrow demo"><i class="ti ti-brand-figma ic" aria-hidden="true"></i><span class="nm">Figma Library</span><span class="ty">link</span><span class="sz">—</span><i class="ti ti-external-link" aria-hidden="true"></i></div>
+          <div class="dlrow demo"><i class="ti ti-pencil ic" aria-hidden="true"></i><span class="nm">Pencil Library</span><span class="ty">link</span><span class="sz">—</span><i class="ti ti-external-link" aria-hidden="true"></i></div>
+          <a class="dlrow" href="assets/downloads/meridian.tailwind.js" download><i class="ti ti-brand-tailwind ic" aria-hidden="true"></i><span class="nm">Tailwind theme</span><span class="ty">.js</span><span class="sz">1 KB</span><i class="ti ti-download" aria-hidden="true"></i></a>
+          <a class="dlrow" href="assets/downloads/meridian-design-system.zip" download><i class="ti ti-box ic" aria-hidden="true"></i><span class="nm">Design system (Tailwind) — preset · tokens · dark mode · README</span><span class="ty">.zip</span><span class="sz">10 KB</span><i class="ti ti-download" aria-hidden="true"></i></a>
+        </div>
+        <div class="callout adv mt6"><i class="ti ti-cloud" aria-hidden="true"></i><span data-i18n="p3.cloudNote"></span></div>
+      </section>
+
+      <section id="legal" data-tier="core">
+        <div class="sec-head"><span class="sec-num">5.2</span><h2 data-i18n="sections.legal">Legal, marca y licencias</h2><span class="sec-en">Legal, trademark &amp; licensing</span><span class="tier"><span class="tdot t-core"></span>core</span></div>
+        <p class="purpose" data-i18n="purpose.legal"></p>
+        <div class="callout mt6"><i class="ti ti-shield-check" aria-hidden="true"></i><span data-i18n="p3.tmNote"></span></div>
+        <div class="chips mt6" data-legal-chips><span class="chip-tag" data-brand-tm>Meridian™</span><span class="chip-tag" data-brand-reg>Meridian®</span><span class="chip-tag" data-legal-notice>© 2026</span></div>
+      </section>
+
+      <section id="governance" data-tier="rec">
+        <div class="sec-head"><span class="sec-num">5.3</span><h2 data-i18n="sections.governance">Gobernanza y contactos</h2><span class="sec-en">Governance &amp; contacts</span><span class="tier"><span class="tdot t-rec"></span>rec</span></div>
+        <p class="purpose" data-i18n="purpose.governance"></p>
+        <div class="govgrid mt6">
+          <div class="card2"><div class="k" data-i18n="p3.owner">Propietario</div><p data-i18n="p3.ownerVal">Equipo de marca</p></div>
+          <div class="card2"><div class="k" data-i18n="p3.contact">Contacto</div><p class="mono" data-i18n="p3.contactVal">marca@meridian.example</p></div>
+          <div class="card2"><div class="k" data-i18n="p3.approvals">Aprobaciones</div><p data-i18n="p3.approvalsVal"></p></div>
+          <div class="card2"><div class="k" data-i18n="p3.review">Ciclo de revisión</div><p data-i18n="p3.reviewVal">Trimestral</p></div>
+        </div>
+      </section>
+
+      <section id="versioning" data-tier="rec">
+        <div class="sec-head"><span class="sec-num">5.4</span><h2 data-i18n="sections.versioning">Control de versiones / changelog</h2><span class="sec-en">Version control / changelog</span><span class="tier"><span class="tdot t-rec"></span>rec</span></div>
+        <p class="purpose" data-i18n="purpose.versioning"></p>
+        <div class="changelog mt6" data-changelog>
+          <div class="clentry"><span class="ver">v0.1</span><span class="date">2026-06</span><ul><li>Estructura base: 6 capítulos, 53 secciones.</li><li>Dirección visual Meridian (Sistema suizo).</li><li>Bilingüe ES/EN.</li></ul></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer id="pager"></footer>
+  <button id="to-top" class="to-top" type="button" aria-label="Volver arriba"><i class="ti ti-arrow-up" aria-hidden="true"></i></button>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/nav.js"></script>
+  <script src="assets/js/copy.js"></script>
+</body>
+</html>

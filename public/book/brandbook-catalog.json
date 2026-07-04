@@ -1,0 +1,749 @@
+{
+  "brand": "Meridian",
+  "doc": "Brand Guidelines — content catalog",
+  "version": "v0.1",
+  "generated": "2026-06-22",
+  "totals": {
+    "sections": 54,
+    "core": 26,
+    "rec": 24,
+    "adv": 5,
+    "media": 33,
+    "textOnly": 22
+  },
+  "legend": {
+    "tier": {
+      "core": "Present in virtually every professional guide — mandatory",
+      "rec": "Expected in a gold-standard system — recommended",
+      "adv": "Maturity differentiator / scope-dependent — advanced"
+    },
+    "mediaType": {
+      "text": "Copy / structured text only — no asset",
+      "color": "Color tokens / swatches",
+      "vector": "SVG / logo / vector art",
+      "font": "Typeface files",
+      "image": "Raster photography / imagery",
+      "illustration": "Illustration assets",
+      "pattern": "Graphic patterns / textures",
+      "icon-set": "Icon library",
+      "diagram": "Schematic diagram (grid, clear-space, spacing)",
+      "mockup": "Applied-context mockup (raster)",
+      "motion": "Video / animation / Lottie",
+      "audio": "Sound / audio assets",
+      "chart": "Data-viz templates",
+      "document": "Formatted doc / template (PDF, deck, docx)",
+      "file-bundle": "Multi-file asset package (zip / kit)",
+      "code": "Machine-readable (tokens JSON, CSS, prompt MD)"
+    }
+  },
+  "pillars": [
+    {
+      "id": "front",
+      "num": "00",
+      "name_es": "Portada",
+      "name_en": "Front matter",
+      "sections": [
+        {
+          "id": "cover",
+          "num": "0.1",
+          "name_es": "Portada y metadata",
+          "name_en": "Cover & metadata",
+          "tier": "core",
+          "media": true,
+          "mediaTypes": [
+            "vector",
+            "image"
+          ],
+          "mediaOptional": true,
+          "deliverable": "Brand lockup + optional hero image; doc metadata (version/date/owner)"
+        },
+        {
+          "id": "toc",
+          "num": "0.2",
+          "name_es": "Índice / navegación",
+          "name_en": "Table of contents",
+          "tier": "core",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Master index / navigation"
+        },
+        {
+          "id": "how-to",
+          "num": "0.3",
+          "name_es": "Cómo usar la guía",
+          "name_en": "How to use & audience",
+          "tier": "rec",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Usage and audience notes"
+        }
+      ]
+    },
+    {
+      "id": "strategic",
+      "num": "01",
+      "name_es": "Fundamento estratégico",
+      "name_en": "Strategic foundation",
+      "sections": [
+        {
+          "id": "mission",
+          "num": "1.1",
+          "name_es": "Propósito, visión, misión y valores",
+          "name_en": "Purpose, vision, mission & values",
+          "tier": "core",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Purpose-led foundation statements"
+        },
+        {
+          "id": "story",
+          "num": "1.2",
+          "name_es": "Historia y herencia",
+          "name_en": "Brand story & heritage",
+          "tier": "rec",
+          "media": true,
+          "mediaTypes": [
+            "image"
+          ],
+          "mediaOptional": true,
+          "deliverable": "Narrative copy + optional heritage imagery / timeline"
+        },
+        {
+          "id": "positioning",
+          "num": "1.3",
+          "name_es": "Posicionamiento y diferenciación",
+          "name_en": "Positioning & differentiation",
+          "tier": "core",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Positioning statement + differentiators"
+        },
+        {
+          "id": "value-prop",
+          "num": "1.4",
+          "name_es": "Propuesta de valor y promesa",
+          "name_en": "Value proposition & promise",
+          "tier": "core",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Value proposition + brand promise"
+        },
+        {
+          "id": "audience",
+          "num": "1.5",
+          "name_es": "Audiencia y personas",
+          "name_en": "Audience & personas",
+          "tier": "core",
+          "media": true,
+          "mediaTypes": [
+            "image"
+          ],
+          "mediaOptional": true,
+          "deliverable": "Audience archetype + user/buyer/proto personas (avatar/photo per persona)"
+        },
+        {
+          "id": "personality",
+          "num": "1.6",
+          "name_es": "Personalidad y arquetipo",
+          "name_en": "Personality & archetype",
+          "tier": "rec",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Brand personality traits + archetype"
+        }
+      ]
+    },
+    {
+      "id": "voice",
+      "num": "02",
+      "name_es": "Tono de voz",
+      "name_en": "Tone of voice",
+      "sections": [
+        {
+          "id": "verbal-foundations",
+          "num": "2.1",
+          "name_es": "Fundamentos de identidad verbal",
+          "name_en": "Verbal identity foundations",
+          "tier": "core",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Verbal identity rationale"
+        },
+        {
+          "id": "voice-tone",
+          "num": "2.2",
+          "name_es": "Voz vs. tono",
+          "name_en": "Voice vs. tone",
+          "tier": "core",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Voice (constant) vs tone (variable)"
+        },
+        {
+          "id": "writing-principles",
+          "num": "2.3",
+          "name_es": "Principios de escritura",
+          "name_en": "Writing principles",
+          "tier": "core",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Principles with is/is-not + examples"
+        },
+        {
+          "id": "tone-flexing",
+          "num": "2.4",
+          "name_es": "Tono por contexto y emoción",
+          "name_en": "Tone flexing by context",
+          "tier": "core",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Tone dials / by emotional state"
+        },
+        {
+          "id": "messaging",
+          "num": "2.5",
+          "name_es": "Jerarquía de mensajes",
+          "name_en": "Messaging hierarchy",
+          "tier": "rec",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Core idea → key messages → proof"
+        },
+        {
+          "id": "naming",
+          "num": "2.6",
+          "name_es": "Naming, tagline y CTA",
+          "name_en": "Naming, tagline & CTA",
+          "tier": "rec",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Naming, tagline, CTA conventions"
+        },
+        {
+          "id": "grammar",
+          "num": "2.7",
+          "name_es": "Gramática y estilo",
+          "name_en": "Grammar & style",
+          "tier": "rec",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Rule / convention / example table"
+        },
+        {
+          "id": "formats",
+          "num": "2.8",
+          "name_es": "Formato de fechas, números y datos",
+          "name_en": "Date, number & data formatting",
+          "tier": "rec",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Date/time/number/currency/unit formats per locale (es-MX, en-US) + ISO 8601 for data; Intl/CLDR for apps"
+        },
+        {
+          "id": "terminology",
+          "num": "2.9",
+          "name_es": "Terminología y palabras vetadas",
+          "name_en": "Terminology & banned words",
+          "tier": "rec",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Use this / avoid that lexicon"
+        },
+        {
+          "id": "inclusive",
+          "num": "2.10",
+          "name_es": "Lenguaje inclusivo y accesible",
+          "name_en": "Inclusive & accessible language",
+          "tier": "rec",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Inclusive language guidance"
+        },
+        {
+          "id": "examples",
+          "num": "2.11",
+          "name_es": "Ejemplos do/don't y antes-después",
+          "name_en": "Do/don't & before-after examples",
+          "tier": "core",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "On-brand vs off-brand copy pairs"
+        },
+        {
+          "id": "channels",
+          "num": "2.12",
+          "name_es": "Tono por canal",
+          "name_en": "Channel-specific tone",
+          "tier": "rec",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Per-channel tone notes"
+        },
+        {
+          "id": "ai-voice",
+          "num": "2.13",
+          "name_es": "Voz para IA generativa",
+          "name_en": "AI generative voice",
+          "tier": "adv",
+          "media": true,
+          "mediaTypes": [
+            "code"
+          ],
+          "deliverable": "Prompt-ready brand-voice block (.md) — machine-readable"
+        }
+      ]
+    },
+    {
+      "id": "visual",
+      "num": "03",
+      "name_es": "Identidad visual",
+      "name_en": "Visual identity",
+      "sections": [
+        {
+          "id": "logo",
+          "num": "3.1",
+          "name_es": "Sistema de logo y variantes",
+          "name_en": "Logo system & variants",
+          "tier": "core",
+          "media": true,
+          "mediaTypes": [
+            "vector"
+          ],
+          "deliverable": "Logo variants — SVG/EPS/PNG (primary, stacked, symbol, wordmark, mono, reverse)"
+        },
+        {
+          "id": "logo-usage",
+          "num": "3.2",
+          "name_es": "Reglas de uso del logo",
+          "name_en": "Logo usage rules",
+          "tier": "core",
+          "media": true,
+          "mediaTypes": [
+            "vector",
+            "diagram"
+          ],
+          "deliverable": "Clear-space & min-size diagrams, approved backgrounds, file formats"
+        },
+        {
+          "id": "logo-misuse",
+          "num": "3.3",
+          "name_es": "Usos incorrectos (do-not)",
+          "name_en": "Logo misuse (do-not)",
+          "tier": "core",
+          "media": true,
+          "mediaTypes": [
+            "image",
+            "vector"
+          ],
+          "deliverable": "Do-not examples grid"
+        },
+        {
+          "id": "color",
+          "num": "3.4",
+          "name_es": "Paleta de color",
+          "name_en": "Color palette",
+          "tier": "core",
+          "media": true,
+          "mediaTypes": [
+            "color",
+            "code"
+          ],
+          "deliverable": "Swatches + HEX/RGB/CMYK/Pantone; tonal scales; tokens (.ase/.json)"
+        },
+        {
+          "id": "typography",
+          "num": "3.5",
+          "name_es": "Tipografía",
+          "name_en": "Typography",
+          "tier": "core",
+          "media": true,
+          "mediaTypes": [
+            "font"
+          ],
+          "deliverable": "Typeface files + type-scale specimen"
+        },
+        {
+          "id": "accessibility",
+          "num": "3.6",
+          "name_es": "Accesibilidad y contraste",
+          "name_en": "Accessibility & contrast",
+          "tier": "core",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "WCAG contrast pairings (data, no asset)"
+        },
+        {
+          "id": "darkmode",
+          "num": "3.7",
+          "name_es": "Modo oscuro (web)",
+          "name_en": "Dark mode (web)",
+          "tier": "core",
+          "media": true,
+          "mediaTypes": [
+            "color",
+            "code"
+          ],
+          "deliverable": "Dark theme spec: surfaces/elevation, role-token mapping (light↔dark), contrast, what-flips-vs-stays, and the web implementation pattern (prefers-color-scheme / color-scheme / [data-theme] / no-FOUC)"
+        },
+        {
+          "id": "iconography",
+          "num": "3.8",
+          "name_es": "Iconografía",
+          "name_en": "Iconography",
+          "tier": "core",
+          "media": true,
+          "mediaTypes": [
+            "icon-set"
+          ],
+          "deliverable": "Icon library — SVG set + construction rules"
+        },
+        {
+          "id": "imagery",
+          "num": "3.9",
+          "name_es": "Fotografía y dirección de arte",
+          "name_en": "Imagery & photography",
+          "tier": "core",
+          "media": true,
+          "mediaTypes": [
+            "image"
+          ],
+          "deliverable": "Photography art-direction + sample images"
+        },
+        {
+          "id": "illustration",
+          "num": "3.10",
+          "name_es": "Estilo de ilustración",
+          "name_en": "Illustration style",
+          "tier": "rec",
+          "media": true,
+          "mediaTypes": [
+            "illustration"
+          ],
+          "deliverable": "Illustration set (SVG/raster) + principles"
+        },
+        {
+          "id": "graphic-elements",
+          "num": "3.11",
+          "name_es": "Elementos gráficos y patrones",
+          "name_en": "Graphic elements & patterns",
+          "tier": "rec",
+          "media": true,
+          "mediaTypes": [
+            "pattern"
+          ],
+          "deliverable": "Patterns / brand devices (vector)"
+        },
+        {
+          "id": "grid",
+          "num": "3.12",
+          "name_es": "Grid, layout y espaciado",
+          "name_en": "Grid, layout & spacing",
+          "tier": "rec",
+          "media": true,
+          "mediaTypes": [
+            "diagram"
+          ],
+          "deliverable": "Grid & spacing diagrams (print/web/app)"
+        },
+        {
+          "id": "motion",
+          "num": "3.13",
+          "name_es": "Motion y animación",
+          "name_en": "Motion & animation",
+          "tier": "rec",
+          "media": true,
+          "mediaTypes": [
+            "motion"
+          ],
+          "deliverable": "Motion principles + sample video/Lottie"
+        },
+        {
+          "id": "dataviz",
+          "num": "3.14",
+          "name_es": "Visualización de datos",
+          "name_en": "Data visualization",
+          "tier": "adv",
+          "media": true,
+          "mediaTypes": [
+            "chart"
+          ],
+          "deliverable": "Chart palette + templates"
+        },
+        {
+          "id": "sonic",
+          "num": "3.15",
+          "name_es": "Identidad sonora",
+          "name_en": "Sonic identity",
+          "tier": "adv",
+          "media": true,
+          "mediaTypes": [
+            "audio"
+          ],
+          "deliverable": "Audio logo + sound files"
+        }
+      ]
+    },
+    {
+      "id": "applications",
+      "num": "04",
+      "name_es": "Aplicaciones",
+      "name_en": "Applications",
+      "sections": [
+        {
+          "id": "print",
+          "num": "4.1",
+          "name_es": "Impresos y papelería",
+          "name_en": "Print & stationery",
+          "tier": "core",
+          "media": true,
+          "mediaTypes": [
+            "mockup",
+            "document"
+          ],
+          "deliverable": "Stationery mockups + print-ready files (PDF/X, AI/INDD)"
+        },
+        {
+          "id": "digital",
+          "num": "4.2",
+          "name_es": "Digital y web",
+          "name_en": "Digital & web",
+          "tier": "core",
+          "media": true,
+          "mediaTypes": [
+            "mockup",
+            "vector"
+          ],
+          "deliverable": "Web/UI mockups + favicons/PWA icons"
+        },
+        {
+          "id": "app-ui",
+          "num": "4.3",
+          "name_es": "App / UI de producto",
+          "name_en": "App / product UI",
+          "tier": "rec",
+          "media": true,
+          "mediaTypes": [
+            "mockup"
+          ],
+          "deliverable": "Product UI mockups"
+        },
+        {
+          "id": "app-icons",
+          "num": "4.4",
+          "name_es": "Iconos de app y assets de tienda",
+          "name_en": "App icons & store assets",
+          "tier": "core",
+          "media": true,
+          "mediaTypes": [
+            "vector",
+            "file-bundle"
+          ],
+          "deliverable": "iOS/Android/Web icon set at all sizes + store assets"
+        },
+        {
+          "id": "social",
+          "num": "4.5",
+          "name_es": "Plantillas de redes sociales",
+          "name_en": "Social media templates",
+          "tier": "core",
+          "media": true,
+          "mediaTypes": [
+            "image"
+          ],
+          "deliverable": "Per-platform templates (avatar/banner/post/story) + dimension specs"
+        },
+        {
+          "id": "email",
+          "num": "4.6",
+          "name_es": "Email y firmas",
+          "name_en": "Email & signatures",
+          "tier": "rec",
+          "media": true,
+          "mediaTypes": [
+            "mockup"
+          ],
+          "deliverable": "Email template + signature (HTML/image)"
+        },
+        {
+          "id": "presentations",
+          "num": "4.7",
+          "name_es": "Presentaciones y documentos",
+          "name_en": "Presentations & documents",
+          "tier": "rec",
+          "media": true,
+          "mediaTypes": [
+            "document"
+          ],
+          "deliverable": "Deck / report / doc templates"
+        },
+        {
+          "id": "packaging",
+          "num": "4.8",
+          "name_es": "Packaging",
+          "name_en": "Packaging",
+          "tier": "rec",
+          "media": true,
+          "mediaTypes": [
+            "mockup"
+          ],
+          "deliverable": "Packaging mockups"
+        },
+        {
+          "id": "signage",
+          "num": "4.9",
+          "name_es": "Señalética y wayfinding",
+          "name_en": "Signage & wayfinding",
+          "tier": "rec",
+          "media": true,
+          "mediaTypes": [
+            "mockup"
+          ],
+          "deliverable": "Signage / wayfinding mockups"
+        },
+        {
+          "id": "environmental",
+          "num": "4.10",
+          "name_es": "Espacial / retail",
+          "name_en": "Environmental & retail",
+          "tier": "adv",
+          "media": true,
+          "mediaTypes": [
+            "mockup"
+          ],
+          "deliverable": "Environmental / retail mockups"
+        },
+        {
+          "id": "merch",
+          "num": "4.11",
+          "name_es": "Merchandising y apparel",
+          "name_en": "Merchandise & apparel",
+          "tier": "rec",
+          "media": true,
+          "mediaTypes": [
+            "mockup"
+          ],
+          "deliverable": "Merch / apparel mockups"
+        },
+        {
+          "id": "vehicle",
+          "num": "4.12",
+          "name_es": "Vehículos / rotulación",
+          "name_en": "Vehicle / livery",
+          "tier": "adv",
+          "media": true,
+          "mediaTypes": [
+            "mockup"
+          ],
+          "deliverable": "Vehicle livery mockups"
+        },
+        {
+          "id": "cobranding",
+          "num": "4.13",
+          "name_es": "Co-branding y alianzas",
+          "name_en": "Co-branding & partnerships",
+          "tier": "rec",
+          "media": true,
+          "mediaTypes": [
+            "vector"
+          ],
+          "deliverable": "Co-brand lockups + rules"
+        }
+      ]
+    },
+    {
+      "id": "resources",
+      "num": "05",
+      "name_es": "Recursos y gobernanza",
+      "name_en": "Resources & governance",
+      "sections": [
+        {
+          "id": "assets",
+          "num": "5.1",
+          "name_es": "Biblioteca de assets y descargas",
+          "name_en": "Asset library & downloads",
+          "tier": "core",
+          "media": true,
+          "mediaTypes": [
+            "file-bundle",
+            "code"
+          ],
+          "deliverable": "Downloads: logo kit, fonts, palette, templates, tokens, AI/code line"
+        },
+        {
+          "id": "legal",
+          "num": "5.2",
+          "name_es": "Legal, marca y licencias",
+          "name_en": "Legal, trademark & licensing",
+          "tier": "core",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Trademark / copyright / licensing notes"
+        },
+        {
+          "id": "governance",
+          "num": "5.3",
+          "name_es": "Gobernanza y contactos",
+          "name_en": "Governance & contacts",
+          "tier": "rec",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Owner / approval workflow / contact"
+        },
+        {
+          "id": "versioning",
+          "num": "5.4",
+          "name_es": "Control de versiones / changelog",
+          "name_en": "Version control / changelog",
+          "tier": "rec",
+          "media": false,
+          "mediaTypes": [
+            "text"
+          ],
+          "deliverable": "Version, date, changelog"
+        }
+      ]
+    }
+  ]
+}

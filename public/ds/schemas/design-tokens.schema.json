@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dmxstudio.local/schemas/meridian-design-tokens.schema.json",
+  "title": "Meridian Design Tokens",
+  "type": "object",
+  "required": ["$schema", "$metadata", "$extensions", "color", "dimension", "component"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "$description": { "type": "string" },
+    "$metadata": {
+      "type": "object",
+      "required": ["brand", "system", "version", "owner", "source"]
+    },
+    "$extensions": {
+      "type": "object",
+      "required": ["figma", "openPencil"],
+      "properties": {
+        "figma": {
+          "type": "object",
+          "required": ["variableCollections", "scopes", "codeSyntax"]
+        },
+        "openPencil": {
+          "type": "object",
+          "required": ["schemaVersion", "projectType", "exportTargets", "componentAttribute", "requiredSections", "componentManifest"]
+        }
+      }
+    }
+  }
+}
